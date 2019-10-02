@@ -1,0 +1,19 @@
+{
+  "name": "condenser",
+  "version": "0.0.1",
+  "description": "NLP framework to express utterance processing as a pipeline of graph transformations.",
+  "main": "build/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceKatt/condenser.git"
+  },
+  "author": "Thomas Kercheval",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpaceKatt/condenser/issues"
+  },
+  "homepage": "https://github.com/SpaceKatt/condenser#readme"
+}
