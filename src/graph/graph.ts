@@ -8,7 +8,7 @@ export interface Node {
 }
 
 export interface Edge {
-
+    score: number;
 }
 
 export interface AdjacencyMatrix {
@@ -21,7 +21,23 @@ export interface AdjacencyMatrix {
     swapNodes(first: number, second: number): void;
 }
 
+export interface MatrixPath {
+    path: number[];
+}
+
+export interface PathStrategy {
+    findPath(matrix: AdjacencyMatrix): IterableIterator<MatrixPath>;
+}
+
+export interface ScoreStrategy {
+    scoreMatrix(matrix: AdjacencyMatrix): AdjacencyMatrix;
+}
+
 export interface Graph {
     id: string;
     adjMatrix: AdjacencyMatrix;
+    scoreStrategy: ScoreStrategy;
+    pathStrategy: PathStrategy;
+    score(): void;
+    getPaths(): IterableIterator<MatrixPath>;
 }
