@@ -1,4 +1,3 @@
-
 export interface Condenser {};
 export interface Parser {};
 export interface Processor {};
