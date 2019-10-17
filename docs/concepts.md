@@ -1,8 +1,17 @@
+- [Concepts](#concepts)
+  - [Universe](#universe)
+  - [Processor](#processor)
+  - [Graph](#graph)
+  - [Token](#token)
+  - [Transformer](#transformer)
+  - [Condenser](#condenser)
+  - [Parser](#parser)
+
+---
+
 # Concepts
 
 Various concepts in `condenser`.
-
----
 
 ## Universe
 
@@ -22,7 +31,7 @@ A transformer takes a series of tokens and transforms them. Transformation may e
 
 Generally, transforms will map one token space into another token space. Suppose our universe, `U`, contains tokens `{A, B, C, D}`. Also, suppose we have a token spaces `X = {A, B}` and `Y = {C, D}`. Then we could define a transform `T: X -> Y` which will map elements from types `{A, B}` to types `{C, D}`.
 
-
+Use cases of transformers involve performing search over tokens for entities with semantics within the domain of our universe. 
 
 ## Condenser
 
