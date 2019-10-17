@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/SpaceKatt/condenser/issues"
   },
-  "homepage": "https://github.com/SpaceKatt/condenser#readme"
+  "homepage": "https://github.com/SpaceKatt/condenser#readme",
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "@types/uuid": "^3.4.5",
+    "gts": "^1.1.0"
+  },
+  "dependencies": {
+    "uuid": "^3.3.3"
+  }
 }
