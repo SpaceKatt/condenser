@@ -21,6 +21,11 @@ export interface AdjacencyMatrix {
     swapNodes(first: number, second: number): void;
 }
 
+//export class AdjacencyMatrixBuilder {
+    //nodes:
+    //constructor() {}
+//}
+
 export interface MatrixPath {
     path: number[];
 }
@@ -33,11 +38,30 @@ export interface ScoreStrategy {
     scoreMatrix(matrix: AdjacencyMatrix): AdjacencyMatrix;
 }
 
+//export
+
+
 export interface Graph {
     id: string;
     adjMatrix: AdjacencyMatrix;
     scoreStrategy: ScoreStrategy;
     pathStrategy: PathStrategy;
+    // To test `score`, mock scoreStrategy. See if the spy has been caught
     score(): void;
+    // TO test `getPaths`, mock adjMatrix.
     getPaths(): IterableIterator<MatrixPath>;
 }
+
+//export class TokenGraph implements Graph {
+    //private constructor(
+        //readonly id: string,
+        //readonly scoreStrategy: ScoreStrategy,
+        //readonly pathStrategy: PathStrategy,
+    //) {
+        //adjMatrix = 
+    //} 
+
+    //score = () => {
+
+    //}
+//}
