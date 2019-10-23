@@ -1,5 +1,10 @@
 import { Edge, Token } from './';
 
+export interface  AdjacencyMatrixParams {
+    adjMatrix?: AdjacencyMatrix;
+    array?: IterableIterator<Token>;
+}
+
 export class AdjacencyMatrix {
     nodes: Token[];
     edges: Edge[][];
@@ -84,8 +89,25 @@ export class AdjacencyMatrix {
         }
 
 
-        // TODO: implement swapNodes
 
     }
-}
 
+    private static fromAdjacencyMatrix(adjMatrix: AdjacencyMatrix): AdjacencyMatrix {
+        // TODO: Implement this!
+        return new AdjacencyMatrix(adjMatrix.getNodes());
+    }
+
+    private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
+        return new AdjacencyMatrix(nodes);
+    }
+
+    static getAdjacencyMatrix(params: AdjacencyMatrixParams) {
+        if (params.adjMatrix) {
+            AdjacencyMatrix.fromAdjacencyMatrix(params.adjMatrix);
+        }
+
+        if (params.array) {
+            AdjacencyMatrix.fromNodeGenerator(params.array);
+        }
+    }
+}
