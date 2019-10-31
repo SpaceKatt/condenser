@@ -3,6 +3,15 @@ export interface TokenOpts {
     id: string;
 }
 
+export interface TokenContructor {
+    new (opts: TokenOpts): Token;
+}
+
+export interface TokenContructorDetails {
+    kind: symbol;
+    ctor: TokenContructor;
+}
+
 export abstract class Token {
     readonly kind: symbol;
     readonly id: string;
@@ -29,13 +38,21 @@ export interface WordTokenOpts extends TokenOpts {
     word: string;
 }
 
+function isWordTokenOpts(opts: TokenOpts): opts is WordTokenOpts {
+    return (opts as WordTokenOpts).word ? true : false;
+}
+
 export class WordToken extends Token {
     readonly word: string;
 
-    constructor(opts: WordTokenOpts) {
+    constructor(opts: TokenOpts) {
         super(opts);
 
-        this.word = opts.word;
+        if (isWordTokenOpts(opts)) {
+            this.word = opts.word;
+        } else {
+            throw new TypeError('WordToken handed bad opts in ctor');
+        }
     }
 
     clone(): WordToken {
@@ -50,6 +67,11 @@ export class WordToken extends Token {
     }
 }
 
+export const wordTokenFactoryDetails: TokenContructorDetails = {
+    kind: WORD,
+    ctor: WordToken,
+}
+
 export const NUMBER: unique symbol = Symbol('WORD');
 export type NUMBER = typeof WORD;
 
@@ -57,13 +79,21 @@ export interface NumberTokenOpts extends TokenOpts {
     num: number;
 }
 
+function isNumberTokenOpts(opts: TokenOpts): opts is NumberTokenOpts {
+    return (opts as NumberTokenOpts).num ? true : false;
+}
+
 export class NumberToken extends Token {
     readonly num: number;
 
-    constructor(opts: NumberTokenOpts) {
+    constructor(opts: TokenOpts) {
         super(opts);
 
-        this.num = opts.num;
+        if (isNumberTokenOpts(opts)) {
+            this.num = opts.num;
+        } else {
+            throw new TypeError('NumberToken handed bad opts in ctor');
+        }
     }
 
     clone(): NumberToken {
@@ -76,4 +106,9 @@ export class NumberToken extends Token {
             num: this.num,
         };
     }
+}
+
+export const numberTokenFactoryDetails: TokenContructorDetails = {
+    kind: NUMBER,
+    ctor: NumberToken,
 }
