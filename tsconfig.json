@@ -5,17 +5,15 @@
     "downlevelIteration": true,
     "inlineSources": true,
     "lib": ["es2018"],
-    "outDir": "build",
+    "outDir": "./build",
     "rootDir": ".",
     "sourceMap": true,
     "strict": true
   },
   "include": [
-    "samples/*.ts",
-    "samples/**/*.ts",
     "src/*.ts",
     "src/**/*.ts",
-    "test/*.ts",
-    "test/**/*.ts"
+    "tests/*.ts",
+    "tests/**/*.ts"
   ]
 }
