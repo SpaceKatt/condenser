@@ -45,7 +45,7 @@ export interface WordTokenOpts extends TokenOpts {
 }
 
 function isWordTokenOpts(opts: TokenOpts): opts is WordTokenOpts {
-    return (opts as WordTokenOpts).word ? true : false;
+    return opts.kind === WORD ? true : false;
 }
 
 export class WordToken extends Token {
@@ -85,14 +85,14 @@ export const wordTokenFactoryDetails: TokenContructorDetails = {
 ///////////////////////////////////////////////////////////////////////////////
 
 export const NUMBER: unique symbol = Symbol('WORD');
-export type NUMBER = typeof WORD;
+export type NUMBER = typeof NUMBER;
 
 export interface NumberTokenOpts extends TokenOpts {
     num: number;
 }
 
 function isNumberTokenOpts(opts: TokenOpts): opts is NumberTokenOpts {
-    return (opts as NumberTokenOpts).num ? true : false;
+    return opts.kind === NUMBER ? true : false;
 }
 
 export class NumberToken extends Token {
