@@ -14,7 +14,7 @@ import {
     TestToken,
     TestTokenOpts,
     testTokenFactoryDetails,
-} from './resources/shared';
+} from './resources';
 
 describe('Token Factory', () => {
     it('Constructs default WORD Tokens', () => {
