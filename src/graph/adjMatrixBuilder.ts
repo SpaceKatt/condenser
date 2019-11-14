@@ -1,7 +1,7 @@
 import { AdjacencyMatrix, AdjacencyMatrixParams, Edge } from './';
 import { Token } from '../';
 
-const zeroEdge: Edge = { score: 0 };
+const newZeroEdge = (): Edge => { return { score: 0 } };
 
 export class AdjacencyMatrixBuilder {
     private nodes: Token[];
@@ -17,7 +17,6 @@ export class AdjacencyMatrixBuilder {
             this.nodes.push(node);
             this.createNewEdges();
         }
-
     }
 
     private createNewEdges(): void {
@@ -26,21 +25,21 @@ export class AdjacencyMatrixBuilder {
         this.edges.push([]);
 
         for (let i = 0; i < previousNumEdges; i++) {
-            this.edges[previousNumEdges][i] = zeroEdge;
+            this.edges[previousNumEdges][i] = newZeroEdge();
         }
 
         for (let i = 0; i < this.edges.length; i++) {
-            this.edges[i][this.edges.length] = zeroEdge;
+            this.edges[i][this.edges.length - 1] = newZeroEdge();
         }
     }
 
     public withEdges(edges: Edge[][]): boolean {
         if (!edges || !edges[0] || edges.length !== edges[0].length) {
-            return false;
+            throw new Error('withEdges received invalid edges');
         }
 
         if (this.edges.length !== edges.length) {
-            return false;
+            throw new Error('withEdges received invalid dimensions');
         }
 
         for (let i = 0; i < edges.length; i++) {
@@ -57,7 +56,17 @@ export class AdjacencyMatrixBuilder {
             array: this.nodes.values(),
         };
 
-        return AdjacencyMatrix.getAdjacencyMatrix(params);
+        const adjMatrix = AdjacencyMatrix.getAdjacencyMatrix(params);
+
+        const length = this.nodes.length;
+
+        for (let i = 0; i < length; i++) {
+            for (let j = 0; j < length; j++) {
+                adjMatrix.setEdge(this.edges[i][j], i, j)
+            }
+        }
+
+        return adjMatrix;
     }
 
     
@@ -65,7 +74,7 @@ export class AdjacencyMatrixBuilder {
         return new AdjacencyMatrixBuilder();
     }
 
-    public static clone(adjMatrix: AdjacencyMatrix): AdjacencyMatrix {
+    static clone(adjMatrix: AdjacencyMatrix): AdjacencyMatrix {
         function* cloneNodes(): IterableIterator<Token> {
             for (const node of adjMatrix.getNodes()) {
                 yield node.clone();
