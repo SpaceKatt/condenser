@@ -1,4 +1,5 @@
-import { Edge, Token } from './';
+import { AdjacencyMatrixBuilder, Edge } from './';
+import { Token } from '../';
 
 export interface  AdjacencyMatrixParams {
     adjMatrix?: AdjacencyMatrix;
@@ -13,7 +14,7 @@ export class AdjacencyMatrix {
         this.nodes = [];
 
         for (const node of nodes) {
-            this.nodes.push(node);
+            this.nodes.push(node.clone());
         }
 
         this.edges = [];
@@ -22,9 +23,7 @@ export class AdjacencyMatrix {
             this.edges.push([]);
 
             for (let j = 0; j < this.nodes.length; j++) {
-                this.edges[i].push({
-                    score: 0,
-                } as Edge);
+                this.edges[i].push(new Edge(0));
             }
         }
 
@@ -64,6 +63,10 @@ export class AdjacencyMatrix {
         return this.nodes[index];
     }
 
+    getNumberNodes(): number {
+        return this.nodes.length;
+    }
+
     getNodes(): IterableIterator<Token> {
         return this.nodes.values();
     }
@@ -90,24 +93,23 @@ export class AdjacencyMatrix {
 
 
 
-    }
 
-    private static fromAdjacencyMatrix(adjMatrix: AdjacencyMatrix): AdjacencyMatrix {
         // TODO: Implement this!
-        return new AdjacencyMatrix(adjMatrix.getNodes());
     }
 
     private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
         return new AdjacencyMatrix(nodes);
     }
 
-    static getAdjacencyMatrix(params: AdjacencyMatrixParams) {
+    static getAdjacencyMatrix(params: AdjacencyMatrixParams): AdjacencyMatrix {
         if (params.adjMatrix) {
-            AdjacencyMatrix.fromAdjacencyMatrix(params.adjMatrix);
+            return AdjacencyMatrixBuilder.clone(params.adjMatrix);
         }
 
         if (params.array) {
-            AdjacencyMatrix.fromNodeGenerator(params.array);
+            return AdjacencyMatrix.fromNodeGenerator(params.array);
         }
+
+        throw new TypeError('AdjacencyMatrix::getAdjacencyMatrix - Invalid parameters');
     }
 }

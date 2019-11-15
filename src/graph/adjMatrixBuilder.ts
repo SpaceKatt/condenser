@@ -1,7 +1,17 @@
-import { AdjacencyMatrix, AdjacencyMatrixParams, Edge } from './';
-import { Token } from '../';
+import {
+    AdjacencyMatrix,
+    AdjacencyMatrixParams,
+    Edge,
+    EdgeCoordinates,
+} from './';
 
-const newZeroEdge = (): Edge => { return { score: 0 } };
+import {
+    isOutsideBounds,
+    cloneNodes,
+    cloneEdges,
+    newZeroEdge,
+    Token,
+} from '../';
 
 export class AdjacencyMatrixBuilder {
     private nodes: Token[];
@@ -33,7 +43,25 @@ export class AdjacencyMatrixBuilder {
         }
     }
 
-    public withEdges(edges: Edge[][]): boolean {
+    public withEdge(edge: Edge, fro: number, to: number): Edge {
+        if (isOutsideBounds(fro, to, 0, this.nodes.length)) {
+            throw new Error('withEdge received out of bounds edge');
+        }
+
+        const prevEdge = this.edges[fro][to];
+
+        this.edges[fro][to] = edge;
+
+        return prevEdge;
+    }
+
+    public withEdgeCoords(coords: IterableIterator<EdgeCoordinates>): void {
+        for (const edgeCoord of coords) {
+            this.withEdge(edgeCoord.edge, edgeCoord.fro, edgeCoord.to);
+        }
+    }
+
+    public withEdges(edges: Edge[][]): void {
         if (!edges || !edges[0] || edges.length !== edges[0].length) {
             throw new Error('withEdges received invalid edges');
         }
@@ -47,8 +75,6 @@ export class AdjacencyMatrixBuilder {
                 this.edges[i][j] = edges[i][j];
             }
         }
-
-        return true;
     }
 
     public build(): AdjacencyMatrix {
@@ -75,16 +101,13 @@ export class AdjacencyMatrixBuilder {
     }
 
     static clone(adjMatrix: AdjacencyMatrix): AdjacencyMatrix {
-        function* cloneNodes(): IterableIterator<Token> {
-            for (const node of adjMatrix.getNodes()) {
-                yield node.clone();
-            }
-        }
+        let length = 0;
 
-        const newMatrixBuilder = this.newBuilder();
+        const matrixBuilder = this.newBuilder();
 
-        newMatrixBuilder.withNodes(cloneNodes());
+        matrixBuilder.withNodes(cloneNodes(adjMatrix));
+        matrixBuilder.withEdgeCoords(cloneEdges(adjMatrix));
 
-        return newMatrixBuilder.build();
+        return matrixBuilder.build();
     }
 }
