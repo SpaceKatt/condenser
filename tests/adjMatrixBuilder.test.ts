@@ -4,6 +4,7 @@ import {
 
 import {
     Edge,
+    newZeroEdge,
 } from '../src';
 
 import {
@@ -117,6 +118,18 @@ describe('Reee', () => {
 
         expect(() => {
             builder.withEdges(edges)
+        }).toThrow(Error);
+    });
+
+    it('Fails when given out of bounds edges', () => {
+        const builder = AdjacencyMatrixBuilder.newBuilder();
+
+        expect(() => {
+            builder.withEdgeCoords([{
+                fro: 0,
+                to: 666,
+                edge: newZeroEdge(),
+            }].values());
         }).toThrow(Error);
     });
 
