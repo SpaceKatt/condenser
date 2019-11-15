@@ -5,32 +5,16 @@ import {
 import {
     Edge,
 } from '../src';
-import {
-    Token,
-    TokenOpts,
-    TokenFactory,
-    WORD,
-    WordToken
-} from '../src/token';
 
 import {
     isZeroMatrix,
     numberArrayToEdges,
+    tokenGenerator,
 } from './resources/shared';
 
-const tokenFactory = TokenFactory.createTokenFactory();
-
-function* tokenGenerator(num: number): IterableIterator<Token> {
-    let i = 0;
-
-    while (i++ < num) {
-        yield tokenFactory.createToken({
-            kind: WORD,
-            id: String(i),
-            word: String(i),
-        } as TokenOpts);
-    }
-}
+import {
+    TESTTOKEN,
+} from './resources/testToken';
 
 describe('Reee', () => {
     it('Builds a one node matrix', () => {
@@ -41,7 +25,7 @@ describe('Reee', () => {
 
         const adjMatrix = builder.build();
 
-        expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(WORD);
+        expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             adjMatrix.getNode(numberOfNodes).kind
         }).toThrow(Error);
@@ -55,7 +39,7 @@ describe('Reee', () => {
 
         const adjMatrix = builder.build();
 
-        expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(WORD);
+        expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             adjMatrix.getNode(numberOfNodes).kind
         }).toThrow(Error);
@@ -69,7 +53,7 @@ describe('Reee', () => {
 
         const adjMatrix = builder.build();
 
-        expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(WORD);
+        expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             adjMatrix.getNode(numberOfNodes).kind
         }).toThrow(Error);
@@ -99,10 +83,10 @@ describe('Reee', () => {
 
         const adjMatrix = builder.build();
 
-        expect(adjMatrix.getEdge(0, 0).score).toEqual(1);
-        expect(adjMatrix.getEdge(0, 1).score).toEqual(2);
-        expect(adjMatrix.getEdge(1, 0).score).toEqual(9);
-        expect(adjMatrix.getEdge(1, 1).score).toEqual(4);
+        expect(adjMatrix.getEdge(0, 0).getScore()).toEqual(1);
+        expect(adjMatrix.getEdge(0, 1).getScore()).toEqual(2);
+        expect(adjMatrix.getEdge(1, 0).getScore()).toEqual(9);
+        expect(adjMatrix.getEdge(1, 1).getScore()).toEqual(4);
     });
 
     it('Is clonable', () => {
@@ -120,10 +104,10 @@ describe('Reee', () => {
 
         const clonedBoi = AdjacencyMatrixBuilder.clone(adjMatrix);
 
-        expect(adjMatrix.getEdge(0, 0).score).toEqual(7);
-        expect(adjMatrix.getEdge(0, 1).score).toEqual(2);
-        expect(adjMatrix.getEdge(1, 0).score).toEqual(8);
-        expect(adjMatrix.getEdge(1, 1).score).toEqual(3);
+        expect(adjMatrix.getEdge(0, 0).getScore()).toEqual(7);
+        expect(adjMatrix.getEdge(0, 1).getScore()).toEqual(2);
+        expect(adjMatrix.getEdge(1, 0).getScore()).toEqual(8);
+        expect(adjMatrix.getEdge(1, 1).getScore()).toEqual(3);
     });
 
     it('Fails when given invalid edges', () => {
