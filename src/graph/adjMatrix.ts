@@ -107,10 +107,47 @@ export class AdjacencyMatrix {
             throw new Error('Out of bound access in AdjacencyMatrix::swapNodes');
         }
 
+        if (first === second) {
+            return;
+        }
 
+        const firstNode = this.getNode(first);
+        const secondNode = this.setNode(firstNode, second);
 
+        this.setNode(secondNode, first);
 
-        // TODO: Implement this!
+        this.swapEdges(first, second);
+    }
+
+    private swapEdges(indexOne: number, indexTwo: number) {
+        if (indexOne < 0
+            || indexOne >= this.nodes.length
+            || indexTwo < 0
+            || indexTwo >= this.nodes.length
+        ) {
+            throw new Error('Out of bound access in AdjacencyMatrix::swapEdges');
+        }
+
+        if (indexOne === indexTwo) {
+            return;
+        }
+
+        const smaller = indexOne < indexTwo ? indexOne : indexTwo;
+        const larger = indexOne > indexTwo ? indexOne : indexTwo;
+
+        // swap columns
+        for (let i = 0; i < this.nodes.length; i++) {
+            const temp = this.edges[i][smaller];
+            this.edges[i][smaller] = this.edges[i][larger];
+            this.edges[i][larger] = temp;
+        }
+
+        // swap rows
+        for (let i = 0; i < this.nodes.length; i++) {
+            const temp = this.edges[smaller][i];
+            this.edges[smaller][i] = this.edges[larger][i];
+            this.edges[larger][i] = temp;
+        }
     }
 
     private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
