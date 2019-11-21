@@ -239,6 +239,47 @@ describe('AdjacencyMatrix', () => {
         expect(secondBeforeMatrix.equalScore(afterMatrix)).toBeTruthy();
     });
 
+    it('swapNodes throws on out of bounds', () => {
+        const opts: AdjacencyMatrixParams = {
+            array: tokenGenerator(3),
+        };
+
+        const adjMatrix = AdjacencyMatrix.getAdjacencyMatrix(opts);
+
+        expect(() => {
+            adjMatrix.swapNodes(4, 7);
+        }).toThrow(Error);
+
+        expect(() => {
+            adjMatrix.swapNodes(-1, 2);
+        }).toThrow(Error);
+
+        expect(() => {
+            adjMatrix.swapNodes(0, 3);
+        }).toThrow(Error);
+    });
+
+    it('swapNodes with equal indices does nothing', () => {
+        const opts: AdjacencyMatrixParams = {
+            array: tokenGenerator(3),
+        };
+
+        const adjMatrix = AdjacencyMatrix.getAdjacencyMatrix(opts);
+
+        const optsTwo: AdjacencyMatrixParams = {
+            array: tokenGenerator(3),
+        };
+
+        const adjMatrixTwo = AdjacencyMatrix.getAdjacencyMatrix(optsTwo);
+
+        for (let i = 0; i < 3; i++) {
+            adjMatrix.swapNodes(i, i);
+
+            expect(adjMatrix.equalScore(adjMatrixTwo)).toBeTruthy();
+            expect(adjMatrixTwo.equalScore(adjMatrix)).toBeTruthy();
+        }
+    });
+
     it('equalScore returns true for equal matrices', () => {
         const opts: AdjacencyMatrixParams = {
             array: tokenGenerator(3),
@@ -280,9 +321,12 @@ describe('AdjacencyMatrix', () => {
         expect(adjMatrixTwo.equalScore(adjMatrix)).toBeFalsy();
     });
 
-    it('', () => {
-    });
+    it('getAdjacencyMatrix throws on bad input', () => {
+        const opts: AdjacencyMatrixParams = {
+        };
 
-    it('', () => {
+        expect(() => {
+            AdjacencyMatrix.getAdjacencyMatrix(opts);
+        }).toThrow(Error);
     });
 })

@@ -5,7 +5,6 @@ import {
 } from '../';
 
 export interface  AdjacencyMatrixParams {
-    adjMatrix?: AdjacencyMatrix;
     array?: IterableIterator<Token>;
 }
 
@@ -134,10 +133,6 @@ export class AdjacencyMatrix {
     }
 
     static getAdjacencyMatrix(params: AdjacencyMatrixParams): AdjacencyMatrix {
-        if (params.adjMatrix) {
-            return AdjacencyMatrixBuilder.clone(params.adjMatrix);
-        }
-
         if (params.array) {
             return AdjacencyMatrix.fromNodeGenerator(params.array);
         }
