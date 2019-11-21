@@ -1,6 +1,8 @@
 import { AdjacencyMatrix, AdjacencyMatrixParams, Edge, EdgeCoordinates } from '../graph';
 import { Token } from '../';
 
+import { v4 as uuid } from 'uuid';
+
 export const newZeroEdge = (): Edge => { return new Edge(0); };
 
 // TODO: tests
@@ -24,6 +26,20 @@ export function* cloneEdges(adjMatrix: AdjacencyMatrix): IterableIterator<EdgeCo
     }
 }
 
+export const numberArrayToEdges = (mat: number[][]): Edge[][] => {
+    const length =  mat.length;
+    const edges: Edge[][] = [];
+
+    for (let i = 0; i < length; i++) {
+        edges.push([]);
+        for (let j = 0; j < length; j++) {
+            edges[i].push(new Edge(mat[i][j]));
+        }
+    }
+    
+    return edges;
+}
+
 /**
  * boundsCheck
  * Checks if two values are within a lower and (exclusive) upper bound
@@ -42,4 +58,8 @@ export const isOutsideBounds = (
     upper: number
 ): boolean => {
     return fro < lower || to < lower || fro >= upper || to >= upper;
+}
+
+function* generateTokenId(): IterableIterator<string> {
+    yield uuid();
 }

@@ -5,11 +5,11 @@ import {
 import {
     Edge,
     newZeroEdge,
+    numberArrayToEdges,
 } from '../src';
 
 import {
     isZeroMatrix,
-    numberArrayToEdges,
     tokenGenerator,
 } from './resources/shared';
 

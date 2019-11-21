@@ -12,6 +12,7 @@ import {
 import {
     TESTTOKEN,
     TestToken,
+    TestTokenOpts,
     testTokenFactoryDetails,
 }from './testToken';
 
@@ -28,30 +29,16 @@ export const isZeroMatrix = (adjMatrix: AdjacencyMatrix): boolean => {
     return true;
 }
 
-export const numberArrayToEdges = (mat: number[][]): Edge[][] => {
-    const length =  mat.length;
-    const edges: Edge[][] = [];
-
-    for (let i = 0; i < length; i++) {
-        edges.push([]);
-        for (let j = 0; j < length; j++) {
-            edges[i].push(new Edge(mat[i][j]));
-        }
-    }
-    
-    return edges;
-}
-
-const tokenFactory = TokenFactory.createTokenFactory([testTokenFactoryDetails].values());
+export const testTokenFactory = TokenFactory.createTokenFactory([testTokenFactoryDetails].values());
 
 export function* tokenGenerator(num: number): IterableIterator<Token> {
     let i = 0;
 
     while (i++ < num) {
-        yield tokenFactory.createToken({
+        yield testTokenFactory.createToken({
             kind: TESTTOKEN,
-            id: String(i),
-            word: String(i),
-        } as TokenOpts);
+            id: String(i - 1),
+            foo: String(i - 1),
+        } as TestTokenOpts);
     }
 }
