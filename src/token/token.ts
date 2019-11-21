@@ -1,6 +1,8 @@
 export interface TokenOpts {
     kind: symbol;
     id: string;
+
+    [key: string]: any;
 }
 
 export interface TokenContructor {

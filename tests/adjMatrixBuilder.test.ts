@@ -17,7 +17,7 @@ import {
     TESTTOKEN,
 } from './resources/testToken';
 
-describe('Reee', () => {
+describe('AdjacencyMatrixBuilder', () => {
     it('Builds a one node matrix', () => {
         const numberOfNodes = 1;
         const builder = AdjacencyMatrixBuilder.newBuilder();
