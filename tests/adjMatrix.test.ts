@@ -16,6 +16,7 @@ import {
     tokenGenerator,
 } from './resources/shared';
 import {
+    TestToken,
     TESTTOKEN,
     TestTokenOpts,
 } from './resources/testToken';
@@ -97,7 +98,7 @@ describe('AdjacencyMatrix', () => {
 
         const adjMatrix = AdjacencyMatrix.getAdjacencyMatrix(opts);
 
-        expect(adjMatrix.getNode(2).id).toEqual('2');
+        expect((adjMatrix.getNode(2) as TestToken).foo).toEqual('2');
     });
 
     it('getNode throws when out of bounds', () => {
@@ -129,10 +130,10 @@ describe('AdjacencyMatrix', () => {
         const result = adjMatrix.setNode(node, 2);
 
         // Expect we get the old node back
-        expect(result.id).toEqual('2');
+        expect((result as TestToken).foo).toEqual('2');
 
         // Expect the node we set exists
-        expect(adjMatrix.getNode(2).id).toEqual(id);
+        expect((adjMatrix.getNode(2) as TestToken).foo).toEqual('bar');
     });
 
     it('setNode throws when out of bounds', () => {

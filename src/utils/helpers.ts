@@ -5,14 +5,12 @@ import { v4 as uuid } from 'uuid';
 
 export const newZeroEdge = (): Edge => { return new Edge(0); };
 
-// TODO: tests
 export function* cloneNodes(adjMatrix: AdjacencyMatrix): IterableIterator<Token> {
     for (const node of adjMatrix.getNodes()) {
         yield node.clone();
     }
 }
 
-// TODO: tests
 export function* cloneEdges(adjMatrix: AdjacencyMatrix): IterableIterator<EdgeCoordinates> {
     const length = adjMatrix.getNumberNodes();
     for (let i = 0; i < length; i++) {
@@ -60,6 +58,6 @@ export const isOutsideBounds = (
     return fro < lower || to < lower || fro >= upper || to >= upper;
 }
 
-function* generateTokenId(): IterableIterator<string> {
+export function* generateTokenId(): IterableIterator<string> {
     yield uuid();
 }

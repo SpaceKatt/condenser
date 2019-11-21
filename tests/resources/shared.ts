@@ -2,6 +2,9 @@ import {
     AdjacencyMatrix,
     Edge,
 } from '../../src';
+import {
+    generateTokenId,
+} from '../../src/utils';
 
 import {
     Token,
@@ -33,11 +36,12 @@ export const testTokenFactory = TokenFactory.createTokenFactory([testTokenFactor
 
 export function* tokenGenerator(num: number): IterableIterator<Token> {
     let i = 0;
+    const idGenerator = generateTokenId();
 
     while (i++ < num) {
         yield testTokenFactory.createToken({
             kind: TESTTOKEN,
-            id: String(i - 1),
+            id: idGenerator.next().value,
             foo: String(i - 1),
         } as TestTokenOpts);
     }
