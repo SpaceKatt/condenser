@@ -1,5 +1,8 @@
 import { AdjacencyMatrixBuilder, Edge } from './';
-import { Token } from '../';
+import {
+    isOutsideBounds,
+    Token,
+} from '../';
 
 export interface  AdjacencyMatrixParams {
     adjMatrix?: AdjacencyMatrix;
@@ -46,22 +49,14 @@ export class AdjacencyMatrix {
     }
 
     getEdge(fro: number, to: number): Edge {
-        if (fro < 0
-            || fro >= this.nodes.length
-            || to < 0
-            || to >= this.nodes.length
-        ) {
+        if (isOutsideBounds(fro, to, 0, this.nodes.length)) {
             throw new Error('Out of bound access in AdjacencyMatrix::getEdge');
         }
         return this.edges[fro][to];
     }
 
     setEdge(edge: Edge, fro: number, to: number): Edge {
-        if (fro < 0
-            || fro >= this.nodes.length
-            || to < 0
-            || to >= this.nodes.length
-        ) {
+        if (isOutsideBounds(fro, to, 0, this.nodes.length)) {
             throw new Error('Out of bound access in AdjacencyMatrix::setEdge');
         }
         const oldEdge = this.getEdge(fro, to);
@@ -99,11 +94,7 @@ export class AdjacencyMatrix {
     }
 
     swapNodes(first: number, second: number): void {
-        if (first < 0
-            || first >= this.nodes.length
-            || second < 0
-            || second >= this.nodes.length
-        ) {
+        if (isOutsideBounds(first, second, 0, this.nodes.length)) {
             throw new Error('Out of bound access in AdjacencyMatrix::swapNodes');
         }
 
@@ -120,18 +111,6 @@ export class AdjacencyMatrix {
     }
 
     private swapEdges(indexOne: number, indexTwo: number) {
-        if (indexOne < 0
-            || indexOne >= this.nodes.length
-            || indexTwo < 0
-            || indexTwo >= this.nodes.length
-        ) {
-            throw new Error('Out of bound access in AdjacencyMatrix::swapEdges');
-        }
-
-        if (indexOne === indexTwo) {
-            return;
-        }
-
         const smaller = indexOne < indexTwo ? indexOne : indexTwo;
         const larger = indexOne > indexTwo ? indexOne : indexTwo;
 
