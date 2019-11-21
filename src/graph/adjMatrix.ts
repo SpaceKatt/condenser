@@ -29,6 +29,22 @@ export class AdjacencyMatrix {
 
     }
 
+    equalScore(other: AdjacencyMatrix): boolean {
+        if (other.nodes.length !== this.nodes.length) {
+            return false;
+        }
+
+        for (let i = 0; i < this.nodes.length; i++) {
+            for (let j = 0; j < this.nodes.length; j++) {
+                if (this.getEdge(i, j).getScore() !== other.getEdge(i, j).getScore()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     getEdge(fro: number, to: number): Edge {
         if (fro < 0
             || fro >= this.nodes.length
@@ -71,7 +87,7 @@ export class AdjacencyMatrix {
         return this.nodes.values();
     }
 
-    setNode(index: number, node: Token): Token {
+    setNode(node: Token, index: number): Token {
         if (index < 0 || index >= this.nodes.length) {
             throw new Error('Out of bound access in AdjacencyMatrix::setNode');
         }
