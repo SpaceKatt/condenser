@@ -4,7 +4,11 @@
   "description": "NLP framework to express utterance processing as a pipeline of graph transformations.",
   "main": "build/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "tsc -b .",
+    "pretest": "npm run compile",
+    "": "",
+    "test": "jest --colors --coverage --verbose",
+    "test:watch": "jest --colors --coverage --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,18 @@
   "bugs": {
     "url": "https://github.com/SpaceKatt/condenser/issues"
   },
-  "homepage": "https://github.com/SpaceKatt/condenser#readme"
+  "homepage": "https://github.com/SpaceKatt/condenser#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.1",
+    "@types/uuid": "^3.4.5",
+    "gts": "^1.1.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "uuid": "^3.3.3"
+  }
 }
