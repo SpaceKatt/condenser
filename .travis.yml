@@ -11,4 +11,4 @@ install:
     - npm i
 
 script:
-    - npm test-coverage
+    - npm run test-coverage
