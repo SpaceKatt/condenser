@@ -3,7 +3,7 @@ import {
     Edge,
 } from '../../src';
 import {
-    generateTokenId,
+    generateId,
 } from '../../src/utils';
 
 import {
@@ -36,7 +36,7 @@ export const testTokenFactory = TokenFactory.createTokenFactory([testTokenFactor
 
 export function* tokenGenerator(num: number): IterableIterator<Token> {
     let i = 0;
-    const idGenerator = generateTokenId();
+    const idGenerator = generateId();
 
     while (i++ < num) {
         yield testTokenFactory.createToken({
