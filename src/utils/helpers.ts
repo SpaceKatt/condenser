@@ -58,6 +58,6 @@ export const isOutsideBounds = (
     return fro < lower || to < lower || fro >= upper || to >= upper;
 }
 
-export function* generateTokenId(): IterableIterator<string> {
+export function* generateId(): IterableIterator<string> {
     yield uuid();
 }

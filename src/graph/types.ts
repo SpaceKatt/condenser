@@ -1,7 +1,18 @@
-import { Edge } from './';
+import {
+    AdjacencyMatrix,
+    Edge,
+} from './';
 
 export interface MatrixPath {
     path: number[];
+}
+
+export interface PathStrategy {
+    findPath(matrix: AdjacencyMatrix): IterableIterator<MatrixPath>;
+}
+
+export interface ScoreStrategy {
+    scoreMatrix(matrix: AdjacencyMatrix): AdjacencyMatrix;
 }
 
 export interface EdgeCoordinates {

@@ -1,34 +1,64 @@
-import { AdjacencyMatrix, MatrixPath } from './';
+import {
+    AdjacencyMatrix,
+    Edge,
+    PathStrategy,
+    ScoreStrategy,
+    MatrixPath
+} from './';
 
-export interface PathStrategy {
-    findPath(matrix: AdjacencyMatrix): IterableIterator<MatrixPath>;
-}
+import {
+    Token,
+} from '../token';
+import {
+    generateId,
+} from '../utils';
 
-export interface ScoreStrategy {
-    scoreMatrix(matrix: AdjacencyMatrix): AdjacencyMatrix;
-}
+export class Graph {
+    id: string;
 
-export abstract class Graph {
-    abstract id: string;
-    abstract adjMatrix: AdjacencyMatrix;
-    abstract scoreStrategy: ScoreStrategy;
-    abstract pathStrategy: PathStrategy;
+    private constructor(
+        readonly adjMatrix: AdjacencyMatrix,
+        readonly scoreStrategy: ScoreStrategy,
+        readonly pathStrategy: PathStrategy)
+    { 
+        this.id = generateId().next().value;
+    }
+
     // To test `score`, mock scoreStrategy. See if the spy has been caught
-    abstract score(): void;
+    score(): void {
+        this.scoreStrategy.scoreMatrix(this.adjMatrix);
+    }
+
     // TO test `getPaths`, mock adjMatrix.
-    abstract getPaths(): IterableIterator<MatrixPath>;
+    getPaths(): IterableIterator<MatrixPath> {
+        return this.pathStrategy.findPath(this.adjMatrix);
+    }
+
+    getNodes(): IterableIterator<Token> {
+        return this.adjMatrix.getNodes();
+    }
+
+    getNode(index: number): Token {
+        return this.adjMatrix.getNode(index);
+    }
+
+    setNode(node: Token, index: number): Token {
+        return this.adjMatrix.setNode(node, index);
+    }
+
+    getEdge(fro: number, to: number): Edge {
+        return this.adjMatrix.getEdge(fro, to);
+    }
+
+    setEdge(edge: Edge, fro: number, to: number): void {
+        this.adjMatrix.setEdge(edge, fro, to);
+    }
+
+    getNumberNodes(): number {
+        return this.adjMatrix.getNumberNodes();
+    }
+
+    swapNodes(first: number, second: number): void {
+        this.adjMatrix.swapNodes(first, second);
+    }
 }
-
-//export class TokenGraph implements Graph {
-    //private constructor(
-        //readonly id: string,
-        //readonly scoreStrategy: ScoreStrategy,
-        //readonly pathStrategy: PathStrategy,
-    //) {
-        //adjMatrix = 
-    //} 
-
-    //score = () => {
-
-    //}
-//}
