@@ -8,6 +8,7 @@
     "pretest": "npm run compile",
     "": "",
     "test": "jest --colors --coverage --verbose",
+    "test-coverage": "jest --colors --coverage --verbose | ./node_modules/coveralls/bin/coveralls.js coveralls",
     "test:watch": "jest --colors --coverage --watch"
   },
   "repository": {
@@ -24,6 +25,7 @@
     "@types/jest": "^24.0.19",
     "@types/node": "^12.11.1",
     "@types/uuid": "^3.4.5",
+    "coveralls": "^3.0.8",
     "gts": "^1.1.0",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
