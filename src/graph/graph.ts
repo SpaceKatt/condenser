@@ -66,4 +66,10 @@ export class Graph {
     swapNodes(first: number, second: number): void {
         this.isomorph.swapNodes(first, second);
     }
+
+    clone(): Graph {
+        const newGraph = new Graph(this.isomorph.clone(), this.scoreStrategy, this.pathStrategy);
+
+        return newGraph;
+    }
 }

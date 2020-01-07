@@ -14,4 +14,5 @@ export interface GraphIsomorph {
     setNode(node: Token, index: number): Token;
     getNumberNodes(): number;
     swapNodes(first: number, second: number): void;
+    clone(): GraphIsomorph;
 }

@@ -128,6 +128,10 @@ export class AdjacencyMatrix implements GraphIsomorph{
         }
     }
 
+    clone(): GraphIsomorph {
+        return AdjacencyMatrix.getAdjacencyMatrix({ array: this.getNodes() });
+    }
+
     private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
         return new AdjacencyMatrix(nodes);
     }
