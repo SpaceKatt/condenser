@@ -1,34 +1,75 @@
-import { AdjacencyMatrix, MatrixPath } from './';
+import {
+    AdjacencyMatrix,
+    GraphIsomorph,
+    Edge,
+    PathStrategy,
+    ScoreStrategy,
+    MatrixPath
+} from './';
 
-export interface PathStrategy {
-    findPath(matrix: AdjacencyMatrix): IterableIterator<MatrixPath>;
-}
+import {
+    Token,
+} from '../token';
+import {
+    generateId,
+} from '../utils';
 
-export interface ScoreStrategy {
-    scoreMatrix(matrix: AdjacencyMatrix): AdjacencyMatrix;
-}
+// TODO: GraphBuilder class
+export class Graph {
+    private id: string;
 
-export abstract class Graph {
-    abstract id: string;
-    abstract adjMatrix: AdjacencyMatrix;
-    abstract scoreStrategy: ScoreStrategy;
-    abstract pathStrategy: PathStrategy;
+    private constructor(
+        private readonly isomorph: GraphIsomorph,
+        private readonly scoreStrategy: ScoreStrategy,
+        private readonly pathStrategy: PathStrategy)
+    { 
+        this.id = generateId().next().value;
+    }
+
     // To test `score`, mock scoreStrategy. See if the spy has been caught
-    abstract score(): void;
-    // TO test `getPaths`, mock adjMatrix.
-    abstract getPaths(): IterableIterator<MatrixPath>;
+    score(): void {
+        this.scoreStrategy.scoreIsomorph(this.isomorph);
+    }
+
+    // TO test `getPaths`, mock isomorph.
+    getPaths(): IterableIterator<MatrixPath> {
+        return this.pathStrategy.findPath(this.isomorph);
+    }
+
+    getNodes(): IterableIterator<Token> {
+        return this.isomorph.getNodes();
+    }
+
+    getNode(index: number): Token {
+        return this.isomorph.getNode(index);
+    }
+
+    setNode(node: Token, index: number): Token {
+        return this.isomorph.setNode(node, index);
+    }
+
+    getEdge(fro: number, to: number): Edge {
+        return this.isomorph.getEdge(fro, to);
+    }
+
+    setEdge(edge: Edge, fro: number, to: number): Edge {
+        const old = this.isomorph.getEdge(fro, to);
+        this.isomorph.setEdge(edge, fro, to);
+
+        return old;
+    }
+
+    getNumberNodes(): number {
+        return this.isomorph.getNumberNodes();
+    }
+
+    swapNodes(first: number, second: number): void {
+        this.isomorph.swapNodes(first, second);
+    }
+
+    clone(): Graph {
+        const newGraph = new Graph(this.isomorph.clone(), this.scoreStrategy, this.pathStrategy);
+
+        return newGraph;
+    }
 }
-
-//export class TokenGraph implements Graph {
-    //private constructor(
-        //readonly id: string,
-        //readonly scoreStrategy: ScoreStrategy,
-        //readonly pathStrategy: PathStrategy,
-    //) {
-        //adjMatrix = 
-    //} 
-
-    //score = () => {
-
-    //}
-//}

@@ -1,4 +1,4 @@
-import { AdjacencyMatrixBuilder, Edge } from './';
+import { AdjacencyMatrixBuilder, Edge, GraphIsomorph } from './';
 import {
     isOutsideBounds,
     Token,
@@ -8,7 +8,7 @@ export interface  AdjacencyMatrixParams {
     array?: IterableIterator<Token>;
 }
 
-export class AdjacencyMatrix {
+export class AdjacencyMatrix implements GraphIsomorph{
     nodes: Token[];
     edges: Edge[][];
 
@@ -126,6 +126,10 @@ export class AdjacencyMatrix {
             this.edges[smaller][i] = this.edges[larger][i];
             this.edges[larger][i] = temp;
         }
+    }
+
+    clone(): GraphIsomorph {
+        return AdjacencyMatrix.getAdjacencyMatrix({ array: this.getNodes() });
     }
 
     private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
