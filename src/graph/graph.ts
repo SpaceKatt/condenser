@@ -1,5 +1,6 @@
 import {
     AdjacencyMatrix,
+    GraphIsomorph,
     Edge,
     PathStrategy,
     ScoreStrategy,
@@ -13,52 +14,56 @@ import {
     generateId,
 } from '../utils';
 
+// TODO: GraphBuilder class
 export class Graph {
-    id: string;
+    private id: string;
 
     private constructor(
-        readonly adjMatrix: AdjacencyMatrix,
-        readonly scoreStrategy: ScoreStrategy,
-        readonly pathStrategy: PathStrategy)
+        private readonly isomorph: GraphIsomorph,
+        private readonly scoreStrategy: ScoreStrategy,
+        private readonly pathStrategy: PathStrategy)
     { 
         this.id = generateId().next().value;
     }
 
     // To test `score`, mock scoreStrategy. See if the spy has been caught
     score(): void {
-        this.scoreStrategy.scoreMatrix(this.adjMatrix);
+        this.scoreStrategy.scoreIsomorph(this.isomorph);
     }
 
-    // TO test `getPaths`, mock adjMatrix.
+    // TO test `getPaths`, mock isomorph.
     getPaths(): IterableIterator<MatrixPath> {
-        return this.pathStrategy.findPath(this.adjMatrix);
+        return this.pathStrategy.findPath(this.isomorph);
     }
 
     getNodes(): IterableIterator<Token> {
-        return this.adjMatrix.getNodes();
+        return this.isomorph.getNodes();
     }
 
     getNode(index: number): Token {
-        return this.adjMatrix.getNode(index);
+        return this.isomorph.getNode(index);
     }
 
     setNode(node: Token, index: number): Token {
-        return this.adjMatrix.setNode(node, index);
+        return this.isomorph.setNode(node, index);
     }
 
     getEdge(fro: number, to: number): Edge {
-        return this.adjMatrix.getEdge(fro, to);
+        return this.isomorph.getEdge(fro, to);
     }
 
-    setEdge(edge: Edge, fro: number, to: number): void {
-        this.adjMatrix.setEdge(edge, fro, to);
+    setEdge(edge: Edge, fro: number, to: number): Edge {
+        const old = this.isomorph.getEdge(fro, to);
+        this.isomorph.setEdge(edge, fro, to);
+
+        return old;
     }
 
     getNumberNodes(): number {
-        return this.adjMatrix.getNumberNodes();
+        return this.isomorph.getNumberNodes();
     }
 
     swapNodes(first: number, second: number): void {
-        this.adjMatrix.swapNodes(first, second);
+        this.isomorph.swapNodes(first, second);
     }
 }

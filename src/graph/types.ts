@@ -1,6 +1,6 @@
 import {
-    AdjacencyMatrix,
     Edge,
+    GraphIsomorph,
 } from './';
 
 export interface MatrixPath {
@@ -8,11 +8,11 @@ export interface MatrixPath {
 }
 
 export interface PathStrategy {
-    findPath(matrix: AdjacencyMatrix): IterableIterator<MatrixPath>;
+    findPath(matrix: GraphIsomorph): IterableIterator<MatrixPath>;
 }
 
 export interface ScoreStrategy {
-    scoreMatrix(matrix: AdjacencyMatrix): AdjacencyMatrix;
+    scoreIsomorph(matrix: GraphIsomorph): GraphIsomorph;
 }
 
 export interface EdgeCoordinates {
