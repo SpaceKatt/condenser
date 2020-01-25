@@ -3,14 +3,14 @@ import {
     AdjacencyMatrixBuilder,
     AdjacencyMatrixParams,
     Edge,
-} from '../src/graph';
+} from '../graph';
 import {
     TokenFactory,
-} from '../src/token';
+} from '../token';
 import {
     newZeroEdge,
     numberArrayToEdges,
-} from '../src/utils';
+} from '../utils';
 import {
     testTokenFactory,
     tokenGenerator,

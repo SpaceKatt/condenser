@@ -1,6 +1,6 @@
 import {
     Edge,
-} from '../src/graph';
+} from '../graph';
 
 describe('Edge', () => {
     it('getScore', () => {

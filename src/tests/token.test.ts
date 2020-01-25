@@ -6,7 +6,7 @@ import {
     WORD,
     WordToken,
     WordTokenOpts,
-} from '../src/token';
+} from '../token';
 
 describe('Token', () => {
     it('NumberToken clone', () => {

@@ -7,7 +7,7 @@ import {
     WORD,
     WordToken,
     WordTokenOpts,
-} from '../src';
+} from '../';
 
 import {
     TESTTOKEN,

@@ -1,16 +1,16 @@
 import {
     AdjacencyMatrix,
     Edge,
-} from '../../src';
+} from '../../';
 import {
     generateId,
-} from '../../src/utils';
+} from '../../utils';
 
 import {
     Token,
     TokenOpts,
     TokenFactory,
-} from '../../src/token';
+} from '../../token';
 
 import {
     TESTTOKEN,

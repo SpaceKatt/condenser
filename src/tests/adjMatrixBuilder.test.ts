@@ -1,12 +1,12 @@
 import {
     AdjacencyMatrixBuilder,
-} from '../src/graph/adjMatrixBuilder';
+} from '../graph/adjMatrixBuilder';
 
 import {
     Edge,
     newZeroEdge,
     numberArrayToEdges,
-} from '../src';
+} from '../';
 
 import {
     isZeroMatrix,

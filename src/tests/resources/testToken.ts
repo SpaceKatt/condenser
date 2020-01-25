@@ -2,7 +2,7 @@ import {
     Token,
     TokenOpts,
     TokenContructorDetails,
-} from '../../src';
+} from '../../';
 
 export const TESTTOKEN: unique symbol = Symbol('TESTTOKEN');
 export type TESTTOKEN = typeof TESTTOKEN;
