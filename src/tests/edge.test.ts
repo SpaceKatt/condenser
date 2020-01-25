@@ -49,5 +49,8 @@ describe('Edge', () => {
         expect(resultMatrix[0][1].equal(new Edge(2))).toBeTruthy();
         expect(resultMatrix[1][0].equal(new Edge(7))).toBeTruthy();
         expect(resultMatrix[1][1].equal(new Edge(5))).toBeTruthy();
+
+        expect(resultMatrix.length === 2).toBeTruthy();
+        expect(resultMatrix[0].length === 2).toBeTruthy();
     });
 });
