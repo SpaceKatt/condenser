@@ -15,4 +15,5 @@ export interface GraphIsomorph {
     getNumberNodes(): number;
     swapNodes(first: number, second: number): void;
     clone(): GraphIsomorph;
+    equalScore(other: GraphIsomorph): boolean;
 }

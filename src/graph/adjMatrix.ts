@@ -9,8 +9,8 @@ export interface  AdjacencyMatrixParams {
 }
 
 export class AdjacencyMatrix implements GraphIsomorph{
-    nodes: Token[];
-    edges: Edge[][];
+    private nodes: Token[];
+    private edges: Edge[][];
 
     private constructor(nodes: IterableIterator<Token>) {
         this.nodes = [];
@@ -31,8 +31,8 @@ export class AdjacencyMatrix implements GraphIsomorph{
 
     }
 
-    equalScore(other: AdjacencyMatrix): boolean {
-        if (other.nodes.length !== this.nodes.length) {
+    equalScore(other: GraphIsomorph): boolean {
+        if (other.getNumberNodes() !== this.nodes.length) {
             return false;
         }
 
