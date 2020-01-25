@@ -1,1 +1,1 @@
-export * from './scoreStrategy';
+export * from './nullScoreStrategy';
