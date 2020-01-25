@@ -18,6 +18,14 @@ describe('Edge', () => {
         expect(edge.getScore()).toEqual(5);
     });
 
+    it('equal values equal', () => {
+        expect((new Edge(7)).equal(new Edge(7))).toBeTruthy();
+    });
+
+    it('unequal values do not equal', () => {
+        expect((new Edge(7)).equal(new Edge(6))).toBeFalsy();
+    });
+
     it('clone', () => {
         const edge = new Edge(2);
 
@@ -27,5 +35,19 @@ describe('Edge', () => {
 
         edge.setScore(6);
         expect(cloneWar.getScore()).toEqual(2);
+    });
+
+    it('Creates Edge matrix from number matrix', () => {
+        const scoreMatrix = [
+            [1, 2],
+            [7, 5]
+        ];
+
+        const resultMatrix = Edge.getMatrixFromScoreMatrix(scoreMatrix);
+
+        expect(resultMatrix[0][0].equal(new Edge(1))).toBeTruthy();
+        expect(resultMatrix[0][1].equal(new Edge(2))).toBeTruthy();
+        expect(resultMatrix[1][0].equal(new Edge(7))).toBeTruthy();
+        expect(resultMatrix[1][1].equal(new Edge(5))).toBeTruthy();
     });
 });
