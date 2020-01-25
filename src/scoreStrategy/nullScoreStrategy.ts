@@ -4,7 +4,13 @@ import {
 } from '../';
 
 export class NullScoreStrategy implements ScoreStrategy {
+    private constructor() {}
+
     scoreIsomorph(isomorph: GraphIsomorph): GraphIsomorph {
-        return isomorph;
+        return isomorph.clone();
+    }
+
+    static create(): NullScoreStrategy {
+        return new NullScoreStrategy();
     }
 }
