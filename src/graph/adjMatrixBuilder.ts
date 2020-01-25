@@ -22,11 +22,13 @@ export class AdjacencyMatrixBuilder {
         this.edges = [];
     }
 
-    public withNodes(nodes: IterableIterator<Token>): void {
+    public withNodes(nodes: IterableIterator<Token>): AdjacencyMatrixBuilder {
         for (const node of nodes) {
             this.nodes.push(node);
             this.createNewEdges();
         }
+
+        return this;
     }
 
     private createNewEdges(): void {
