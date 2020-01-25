@@ -1,7 +1,9 @@
 import {
     AdjacencyMatrix,
     Edge,
+    Path,
 } from '../../';
+
 import {
     generateId,
 } from '../../utils';
@@ -17,7 +19,19 @@ import {
     TestToken,
     TestTokenOpts,
     testTokenFactoryDetails,
-}from './testToken';
+} from './testToken';
+
+export const isEqualPaths = (a: Path, b: Path): boolean => {
+    if (a === b) return true;
+    if (!a || !b) return false;
+    if (a.length !== b.length) return false;
+
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+
+    return true;
+}
 
 export const isZeroMatrix = (adjMatrix: AdjacencyMatrix): boolean => {
     const length = adjMatrix.getNumberNodes();
