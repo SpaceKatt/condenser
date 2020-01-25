@@ -22,11 +22,13 @@ export class AdjacencyMatrixBuilder {
         this.edges = [];
     }
 
-    public withNodes(nodes: IterableIterator<Token>): void {
+    public withNodes(nodes: IterableIterator<Token>): AdjacencyMatrixBuilder {
         for (const node of nodes) {
             this.nodes.push(node);
             this.createNewEdges();
         }
+
+        return this;
     }
 
     private createNewEdges(): void {
@@ -43,7 +45,7 @@ export class AdjacencyMatrixBuilder {
         }
     }
 
-    public withEdge(edge: Edge, fro: number, to: number): Edge {
+    public withEdge(edge: Edge, fro: number, to: number): AdjacencyMatrixBuilder {
         if (isOutsideBounds(fro, to, 0, this.nodes.length)) {
             throw new Error('withEdge received out of bounds edge');
         }
@@ -52,16 +54,18 @@ export class AdjacencyMatrixBuilder {
 
         this.edges[fro][to] = edge;
 
-        return prevEdge;
+        return this;
     }
 
-    public withEdgeCoords(coords: IterableIterator<EdgeCoordinates>): void {
+    public withEdgeCoords(coords: IterableIterator<EdgeCoordinates>): AdjacencyMatrixBuilder {
         for (const edgeCoord of coords) {
             this.withEdge(edgeCoord.edge, edgeCoord.fro, edgeCoord.to);
         }
+
+        return this;
     }
 
-    public withEdges(edges: Edge[][]): void {
+    public withEdges(edges: Edge[][]): AdjacencyMatrixBuilder {
         if (!edges || !edges[0] || edges.length !== edges[0].length) {
             throw new Error('withEdges received invalid edges');
         }
@@ -75,6 +79,8 @@ export class AdjacencyMatrixBuilder {
                 this.edges[i][j] = edges[i][j];
             }
         }
+
+        return this;
     }
 
     public build(): AdjacencyMatrix {

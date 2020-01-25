@@ -1,4 +1,4 @@
-import { AdjacencyMatrixBuilder, Edge, GraphIsomorph } from './';
+import { AdjacencyMatrixBuilder, Edge, EdgeCoordinates, GraphIsomorph } from './';
 import {
     isOutsideBounds,
     Token,
@@ -6,11 +6,12 @@ import {
 
 export interface  AdjacencyMatrixParams {
     array?: IterableIterator<Token>;
+    edges?: IterableIterator<EdgeCoordinates>;
 }
 
 export class AdjacencyMatrix implements GraphIsomorph{
-    nodes: Token[];
-    edges: Edge[][];
+    private nodes: Token[];
+    private edges: Edge[][];
 
     private constructor(nodes: IterableIterator<Token>) {
         this.nodes = [];
@@ -31,8 +32,8 @@ export class AdjacencyMatrix implements GraphIsomorph{
 
     }
 
-    equalScore(other: AdjacencyMatrix): boolean {
-        if (other.nodes.length !== this.nodes.length) {
+    equalScore(other: GraphIsomorph): boolean {
+        if (other.getNumberNodes() !== this.nodes.length) {
             return false;
         }
 
@@ -45,6 +46,22 @@ export class AdjacencyMatrix implements GraphIsomorph{
         }
 
         return true;
+    }
+
+    getEdgeCoordinates(): IterableIterator<EdgeCoordinates> {
+        const clonedEdges: EdgeCoordinates[] = [];
+
+        for (let i = 0; i < this.nodes.length; i++) {
+            for (let j = 0; j < this.nodes.length; j++) {
+                clonedEdges.push({
+                    fro: i,
+                    to: j,
+                    edge: this.getEdge(i, j),
+                });
+            }
+        }
+
+        return clonedEdges.values();
     }
 
     getEdge(fro: number, to: number): Edge {
@@ -129,7 +146,7 @@ export class AdjacencyMatrix implements GraphIsomorph{
     }
 
     clone(): GraphIsomorph {
-        return AdjacencyMatrix.getAdjacencyMatrix({ array: this.getNodes() });
+        return AdjacencyMatrix.getAdjacencyMatrix({ array: this.getNodes(), edges: this.getEdgeCoordinates() });
     }
 
     private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
@@ -137,6 +154,14 @@ export class AdjacencyMatrix implements GraphIsomorph{
     }
 
     static getAdjacencyMatrix(params: AdjacencyMatrixParams): AdjacencyMatrix {
+        if (params.array && params.edges) {
+            return AdjacencyMatrixBuilder
+                .newBuilder()
+                .withNodes(params.array)
+                .withEdgeCoords(params.edges)
+                .build();
+        }
+
         if (params.array) {
             return AdjacencyMatrix.fromNodeGenerator(params.array);
         }

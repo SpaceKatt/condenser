@@ -59,5 +59,7 @@ export const isOutsideBounds = (
 }
 
 export function* generateId(): IterableIterator<string> {
-    yield uuid();
+    while (true) {
+        yield uuid();
+    }
 }
