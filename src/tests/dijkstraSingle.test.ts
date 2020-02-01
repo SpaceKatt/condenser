@@ -30,14 +30,29 @@ describe('DijkstraSinglePath', () => {
         const pathIterator = pathStrategy.findPaths(adjMatrix);
 
         const bestPath = pathIterator.next().value;
-        console.log(bestPath);
 
         expect(isEqualPaths(bestPath, knownBestPath)).toBeTruthy();
     });
 
-    it('Only picks one path', () => {
+    it('Picks best path, again', () => {
     });
 
-    it('', () => {
+    it('Only picks one path', () => {
+        const adjMatrix = AdjacencyMatrixBuilder
+            .newBuilder()
+            .withNodes(tokenGenerator(3))
+            .withEdges(Edge.getMatrixFromScoreMatrix([
+                [0, 1, 0],
+                [0, 0, 1],
+                [0, 0, 0]
+            ]))
+            .build();
+
+        const pathStrategy = DijkstraSinglePath.create();
+
+        const pathIterator = pathStrategy.findPaths(adjMatrix);
+
+        expect(pathIterator.next()).toBeDefined();
+        expect(pathIterator.next()).toBeUndefined();
     });
 });
