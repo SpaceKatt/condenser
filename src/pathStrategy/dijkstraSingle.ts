@@ -7,19 +7,23 @@ import {
 } from '../';
 
 export class DijkstraSinglePath implements PathStrategy {
-    private generateCostArray(isomorph: GraphIsomorph): number[] {
+    // Finds max cost to each path from source (node zero)
+    private generateMaxCostArray(isomorph: GraphIsomorph): number[] {
         const lenNodes = isomorph.getNumberNodes();
 
         const visitQueue: number[] = [0];
         const visited: boolean[] = new Array(lenNodes).fill(false);
         const cost: number[] = new Array(lenNodes).fill(-1);
+
         cost[0] = 0;
         let found = false;
 
-        const recurse = (index: number): void => {
+        // Bredth-first helper
+        const searchNeighbors = (index: number): void => {
             const costToIndex = cost[index];
+
             for (let i = 0; i < lenNodes; i++) {
-                // If node is a cycle, skip
+                // If node at i causes a cycle, skip
                 if (visited[i] === true || i === index) {
                     continue;
                 }
@@ -35,6 +39,7 @@ export class DijkstraSinglePath implements PathStrategy {
             }
         };
 
+        // Search while we still have more candidates to inspect
         while (!found && visitQueue.length > 0) {
             const index: number = visitQueue.pop()!;
 
@@ -43,7 +48,7 @@ export class DijkstraSinglePath implements PathStrategy {
             }
 
             visited[index] = true;
-            recurse(index);
+            searchNeighbors(index);
 
             found = cost[lenNodes - 1] > 0;
         }
@@ -55,6 +60,8 @@ export class DijkstraSinglePath implements PathStrategy {
         return cost;
     }
 
+    // From max cost to each node from source, find max cost from source to sink
+    // The source is always node zero and the sink is always the last node
     private findMaxCostPath(costArray: number[]): Path {
         const len = costArray.length;
         const visited: boolean[] = new Array(len).fill(false);
@@ -62,7 +69,7 @@ export class DijkstraSinglePath implements PathStrategy {
 
         const path: Path = [len - 1];
 
-        // Until we visit the source and have more nodes
+        // Until we visit the source and have more nodes to visit
         while (path[path.length - 1] !== 0 && visitQueue.length > 0) {
             const currentNode = visitQueue.pop()!;
 
@@ -94,7 +101,7 @@ export class DijkstraSinglePath implements PathStrategy {
     }
 
     findPaths(isomorph: GraphIsomorph): IterableIterator<Path> {
-        const costArray = this.generateCostArray(isomorph);
+        const costArray = this.generateMaxCostArray(isomorph);
         const path = this.findMaxCostPath(costArray);
 
         return [path].values();
