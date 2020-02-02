@@ -23,7 +23,7 @@ describe('DijkstraSinglePath', () => {
             ]))
             .build();
 
-        const knownBestPath: Path = [1, 2, 3];
+        const knownBestPath: Path = [0, 1, 2];
 
         const pathStrategy = DijkstraSinglePath.create();
 
@@ -46,7 +46,7 @@ describe('DijkstraSinglePath', () => {
             ]))
             .build();
 
-        const knownBestPath: Path = [1, 3, 2, 4];
+        const knownBestPath: Path = [0, 2, 1, 3];
 
         const pathStrategy = DijkstraSinglePath.create();
 
