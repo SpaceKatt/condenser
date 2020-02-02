@@ -63,7 +63,7 @@ export class DijkstraSinglePath implements PathStrategy {
         const path: Path = [len - 1];
 
         // Until we visit the source and have more nodes
-        while (path[path.length - 1] && visitQueue.length > 0) {
+        while (path[path.length - 1] !== 0 && visitQueue.length > 0) {
             const currentNode = visitQueue.pop()!;
 
             visited[currentNode] = true;
@@ -83,7 +83,7 @@ export class DijkstraSinglePath implements PathStrategy {
             }
 
             if (nextIndex < 0) {
-                throw new Error('DijkstraSinglePath::findMaxCost : Cycle detected');
+                throw new Error('DijkstraSinglePath::findMaxCost : Disconnected graph');
             }
 
             visitQueue.push(nextIndex);
