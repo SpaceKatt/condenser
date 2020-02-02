@@ -28,6 +28,7 @@ describe('AdjacencyMatrixBuilder', () => {
 
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
+            /* tslint:disable-next-line:no-unused-expression */
             adjMatrix.getNode(numberOfNodes).kind
         }).toThrow(Error);
     });
@@ -42,6 +43,7 @@ describe('AdjacencyMatrixBuilder', () => {
 
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
+            /* tslint:disable-next-line:no-unused-expression */
             adjMatrix.getNode(numberOfNodes).kind
         }).toThrow(Error);
     });
@@ -56,6 +58,7 @@ describe('AdjacencyMatrixBuilder', () => {
 
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
+            /* tslint:disable-next-line:no-unused-expression */
             adjMatrix.getNode(numberOfNodes).kind
         }).toThrow(Error);
     });
