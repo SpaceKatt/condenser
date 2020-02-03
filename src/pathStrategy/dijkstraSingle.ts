@@ -16,7 +16,7 @@ interface PastMemo {
 export class DijkstraSinglePath implements PathStrategy {
     private readonly source = 0;
 
-    // Finds max cost to each path from source (node zero)
+    // Finds max cost to each path from source
     private generateMaxCostMemos(isomorph: GraphIsomorph): PastMemo[] {
         const lenNodes = isomorph.getNumberNodes();
         const destination = lenNodes - 1;
