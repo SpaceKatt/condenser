@@ -62,10 +62,7 @@ describe('AdjacencyMatrixBuilder', () => {
     });
 
     it('Is set with custom edges', () => {
-        const mat: number[][] = [
-            [1, 2],
-            [9, 4],
-        ];
+        const mat: number[][] = [[1, 2], [9, 4]];
 
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
@@ -81,10 +78,7 @@ describe('AdjacencyMatrixBuilder', () => {
     });
 
     it('Is clonable', () => {
-        const mat: number[][] = [
-            [7, 2],
-            [8, 3],
-        ];
+        const mat: number[][] = [[7, 2], [8, 3]];
 
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
@@ -92,8 +86,6 @@ describe('AdjacencyMatrixBuilder', () => {
         builder.withEdges(numberArrayToEdges(mat));
 
         const adjMatrix = builder.build();
-
-        const clonedBoi = AdjacencyMatrixBuilder.clone(adjMatrix);
 
         expect(adjMatrix.getEdge(0, 0).getScore()).toEqual(7);
         expect(adjMatrix.getEdge(0, 1).getScore()).toEqual(2);
@@ -130,10 +122,7 @@ describe('AdjacencyMatrixBuilder', () => {
     it('Fails when given no initialized nodes', () => {
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
-        const edges: Edge[][] = numberArrayToEdges([
-            [1, 2],
-            [2, 1],
-        ]);
+        const edges: Edge[][] = numberArrayToEdges([[1, 2], [2, 1]]);
 
         expect(() => {
             builder.withEdges(edges);

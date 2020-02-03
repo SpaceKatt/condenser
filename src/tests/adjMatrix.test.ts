@@ -7,7 +7,6 @@ import {
     AdjacencyMatrixParams,
     Edge,
 } from '../graph';
-import { TokenFactory } from '../token';
 import { newZeroEdge, numberArrayToEdges } from '../utils';
 
 describe('AdjacencyMatrix', () => {
@@ -153,22 +152,14 @@ describe('AdjacencyMatrix', () => {
     it('swapNodes swaps two nodes', () => {
         const beforeBuilder = AdjacencyMatrixBuilder.newBuilder();
 
-        const before = [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9],
-        ];
+        const before = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
         beforeBuilder.withNodes(tokenGenerator(3));
         beforeBuilder.withEdges(numberArrayToEdges(before));
 
         const afterBuilder = AdjacencyMatrixBuilder.newBuilder();
 
-        const after = [
-            [1, 3, 2],
-            [7, 9, 8],
-            [4, 6, 5],
-        ];
+        const after = [[1, 3, 2], [7, 9, 8], [4, 6, 5]];
 
         afterBuilder.withNodes(tokenGenerator(3));
         afterBuilder.withEdges(numberArrayToEdges(after));
@@ -191,8 +182,8 @@ describe('AdjacencyMatrix', () => {
         const beforeBuilder = AdjacencyMatrixBuilder.newBuilder();
 
         const before = [
-            [ 1,  2,  3,  4,  5],
-            [ 6,  7,  8,  9, 10],
+            [1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
             [11, 12, 13, 14, 15],
             [16, 17, 18, 19, 20],
             [21, 22, 23, 24, 25],
@@ -204,10 +195,10 @@ describe('AdjacencyMatrix', () => {
         const afterBuilder = AdjacencyMatrixBuilder.newBuilder();
 
         const after = [
-            [ 1,  4,  3,  2,  5],
+            [1, 4, 3, 2, 5],
             [16, 19, 18, 17, 20],
             [11, 14, 13, 12, 15],
-            [ 6,  9,  8,  7, 10],
+            [6, 9, 8, 7, 10],
             [21, 24, 23, 22, 25],
         ];
 
