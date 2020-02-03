@@ -49,11 +49,11 @@ export class AdjacencyMatrix implements GraphIsomorph{
     }
 
     getEdgeCoordinates(): IterableIterator<EdgeCoordinates> {
-        const clonedEdges: EdgeCoordinates[] = [];
+        const edgeCoords: EdgeCoordinates[] = [];
 
         for (let i = 0; i < this.nodes.length; i++) {
             for (let j = 0; j < this.nodes.length; j++) {
-                clonedEdges.push({
+                edgeCoords.push({
                     fro: i,
                     to: j,
                     edge: this.getEdge(i, j),
@@ -61,7 +61,7 @@ export class AdjacencyMatrix implements GraphIsomorph{
             }
         }
 
-        return clonedEdges.values();
+        return edgeCoords.values();
     }
 
     getEdge(fro: number, to: number): Edge {

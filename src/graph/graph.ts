@@ -4,7 +4,7 @@ import {
     Edge,
     PathStrategy,
     ScoreStrategy,
-    MatrixPath
+    Path
 } from './';
 
 import {
@@ -32,8 +32,8 @@ export class Graph {
     }
 
     // TO test `getPaths`, mock isomorph.
-    getPaths(): IterableIterator<MatrixPath> {
-        return this.pathStrategy.findPath(this.isomorph);
+    getPaths(): IterableIterator<Path> {
+        return this.pathStrategy.findPaths(this.isomorph);
     }
 
     getNodes(): IterableIterator<Token> {

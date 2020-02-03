@@ -24,7 +24,7 @@ export class AdjacencyMatrixBuilder {
 
     public withNodes(nodes: IterableIterator<Token>): AdjacencyMatrixBuilder {
         for (const node of nodes) {
-            this.nodes.push(node);
+            this.nodes.push(node.clone());
             this.createNewEdges();
         }
 
@@ -52,7 +52,7 @@ export class AdjacencyMatrixBuilder {
 
         const prevEdge = this.edges[fro][to];
 
-        this.edges[fro][to] = edge;
+        this.edges[fro][to] = edge.clone();
 
         return this;
     }

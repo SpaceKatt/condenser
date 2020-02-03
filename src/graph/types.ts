@@ -3,12 +3,10 @@ import {
     GraphIsomorph,
 } from './';
 
-export interface MatrixPath {
-    path: number[];
-}
+export type Path = number[];
 
 export interface PathStrategy {
-    findPath(matrix: GraphIsomorph): IterableIterator<MatrixPath>;
+    findPaths(matrix: GraphIsomorph): IterableIterator<Path>;
 }
 
 export interface ScoreStrategy {
