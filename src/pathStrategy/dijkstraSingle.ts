@@ -6,52 +6,66 @@ import {
     PathStrategy,
 } from '../';
 
+import { Heap } from 'heap-js';
+
+interface PastMemo {
+    lastNode: number;
+    cost: number;
+}
+
 export class DijkstraSinglePath implements PathStrategy {
+    private readonly source = 0;
+
     // Finds max cost to each path from source (node zero)
-    private generateMaxCostArray(isomorph: GraphIsomorph): number[] {
+    private generateMaxCostMemos(isomorph: GraphIsomorph): PastMemo[] {
         const lenNodes = isomorph.getNumberNodes();
+        const destination = lenNodes - 1;
 
-        const visitQueue: number[] = [0];
-        const visited: boolean[] = new Array(lenNodes).fill(false);
-        const cost: number[] = new Array(lenNodes).fill(-1);
+        const cost: PastMemo[] = new Array(lenNodes).fill({ lastNode: -1, cost: -1 });
+        const neighborHeap = new Heap<number>();
 
-        cost[0] = 0;
-        let found = false;
+        cost[this.source] = { lastNode: -1, cost: 0 };
+        neighborHeap.push(0);
 
-        // Bredth-first helper
+        // Bredth-first, greedy helper
         const searchNeighbors = (index: number): void => {
-            const costToIndex = cost[index];
+            const costToIndex = cost[index].cost;
 
             for (let i = 0; i < lenNodes; i++) {
                 // If node at i causes a cycle, skip
-                if (visited[i] === true || i === index) {
+                if (i === index) {
                     continue;
                 }
 
-                const previousCost = cost[i];
+                const previousCost = cost[i].cost;
                 const costToNode = isomorph.getEdge(index, i).getScore();
 
+                // If an edge exists and new max cost found
                 // TODO: WHat if they are equal? Ambiguous case
-                if (costToNode > 0 && costToIndex + costToNode > costToIndex) {
-                    cost[i] = costToIndex + costToNode;
-                    visitQueue.push(i);
+                if (costToNode > 0 && (costToIndex + costToNode) > previousCost) {
+                    const memo: PastMemo = {
+                        cost: costToIndex + costToNode,
+                        lastNode: index,
+                    };
+
+                    cost[i] = memo;
+
+                    if (!neighborHeap.contains(i)) {
+                        neighborHeap.push(i);
+                    }
                 }
             }
         };
 
         // Search while we still have more candidates to inspect
-        while (!found && visitQueue.length > 0) {
-            const index: number = visitQueue.pop()!;
+        while (!neighborHeap.isEmpty()) {
+            const nextIndex = neighborHeap.pop()!;
 
-            if (visited[index]) {
-                continue;
-            }
-
-            visited[index] = true;
-            searchNeighbors(index);
-
-            found = cost[lenNodes - 1] > 0;
+            searchNeighbors(nextIndex);
         }
+
+        // Cost from source to destination must exist
+        const found = cost[destination].cost > 0;
 
         if (!found) {
             throw new Error('ERROR: DijkstraSinglePath: Path not found');
@@ -62,47 +76,31 @@ export class DijkstraSinglePath implements PathStrategy {
 
     // From max cost to each node from source, find max cost from source to sink
     // The source is always node zero and the sink is always the last node
-    private findMaxCostPath(costArray: number[]): Path {
-        const len = costArray.length;
-        const visited: boolean[] = new Array(len).fill(false);
-        const visitQueue: number[] = [len - 1];
+    private findMaxCostPath(costMemos: PastMemo[]): Path {
+        const len = costMemos.length;
+        const destination = len - 1;
 
-        const path: Path = [len - 1];
+        const reversePath: Path = [destination];
 
         // Until we visit the source and have more nodes to visit
-        while (path[path.length - 1] !== 0 && visitQueue.length > 0) {
-            const currentNode = visitQueue.pop()!;
+        while (reversePath[reversePath.length - 1] !== this.source) {
+            const currentIndex = reversePath[reversePath.length - 1];
+            const nextIndex = costMemos[currentIndex].lastNode;
 
-            visited[currentNode] = true;
-
-            let nextIndex = -1;
-            let maxScore = -1;
-
-            for (let i = 0; i < len; i++) {
-                if (visited[i]) {
-                    continue;
-                }
-
-                if (costArray[i] > maxScore) {
-                    nextIndex = i;
-                    maxScore = costArray[i];
-                }
-            }
-
-            if (nextIndex < 0) {
+            if (reversePath.length > len) {
                 throw new Error('DijkstraSinglePath::findMaxCost : Disconnected graph');
             }
 
-            visitQueue.push(nextIndex);
-            path.push(nextIndex);
+            reversePath.push(nextIndex);
         }
 
-        return path.reverse();
+        return reversePath.reverse();
     }
 
     findPaths(isomorph: GraphIsomorph): IterableIterator<Path> {
-        const costArray = this.generateMaxCostArray(isomorph);
-        const path = this.findMaxCostPath(costArray);
+        // TODO: isomorph.isDirectedAcyclic() check
+        const costMemos = this.generateMaxCostMemos(isomorph);
+        const path = this.findMaxCostPath(costMemos);
 
         return [path].values();
     }
