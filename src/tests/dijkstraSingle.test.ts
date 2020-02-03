@@ -1,7 +1,7 @@
 import {
     AdjacencyMatrix,
     AdjacencyMatrixBuilder,
-    DijkstraSinglePath,
+    DijkstraLongestPath,
     Path,
     Edge,
 } from '../';
@@ -11,7 +11,7 @@ import {
     tokenGenerator,
 } from './resources';
 
-describe('DijkstraSinglePath', () => {
+describe('DijkstraLongestPath', () => {
     it('Picks the best path', () => {
         const adjMatrix = AdjacencyMatrixBuilder
             .newBuilder()
@@ -25,7 +25,7 @@ describe('DijkstraSinglePath', () => {
 
         const knownBestPath: Path = [0, 1, 2];
 
-        const pathStrategy = DijkstraSinglePath.create();
+        const pathStrategy = DijkstraLongestPath.create();
 
         const pathIterator = pathStrategy.findPaths(adjMatrix);
 
@@ -48,7 +48,7 @@ describe('DijkstraSinglePath', () => {
 
         const knownBestPath: Path = [0, 2, 1, 3];
 
-        const pathStrategy = DijkstraSinglePath.create();
+        const pathStrategy = DijkstraLongestPath.create();
 
         const pathIterator = pathStrategy.findPaths(adjMatrix);
 
@@ -71,7 +71,7 @@ describe('DijkstraSinglePath', () => {
 
         const knownBestPath: Path = [0, 2, 3];
 
-        const pathStrategy = DijkstraSinglePath.create();
+        const pathStrategy = DijkstraLongestPath.create();
 
         const pathIterator = pathStrategy.findPaths(adjMatrix);
 
@@ -96,7 +96,7 @@ describe('DijkstraSinglePath', () => {
 
         const knownBestPath: Path = [0, 3, 5];
 
-        const pathStrategy = DijkstraSinglePath.create();
+        const pathStrategy = DijkstraLongestPath.create();
 
         const pathIterator = pathStrategy.findPaths(adjMatrix);
 
@@ -116,7 +116,7 @@ describe('DijkstraSinglePath', () => {
             ]))
             .build();
 
-        const pathStrategy = DijkstraSinglePath.create();
+        const pathStrategy = DijkstraLongestPath.create();
 
         const pathIterator = pathStrategy.findPaths(adjMatrix);
 

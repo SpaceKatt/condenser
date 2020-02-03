@@ -13,7 +13,7 @@ interface PastMemo {
     cost: number;
 }
 
-export class DijkstraSinglePath implements PathStrategy {
+export class DijkstraLongestPath implements PathStrategy {
     private readonly source = 0;
 
     // Finds max cost to each path from source
@@ -105,7 +105,7 @@ export class DijkstraSinglePath implements PathStrategy {
         return [path].values();
     }
 
-    static create(): DijkstraSinglePath {
-        return new DijkstraSinglePath();
+    static create(): DijkstraLongestPath {
+        return new DijkstraLongestPath();
     }
 }
