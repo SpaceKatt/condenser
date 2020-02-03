@@ -18,4 +18,5 @@ export interface GraphIsomorph {
     swapNodes(first: number, second: number): void;
     clone(): GraphIsomorph;
     equalScore(other: GraphIsomorph): boolean;
+    // TODO: isDirectedAcyclic(): boolean;
 }
