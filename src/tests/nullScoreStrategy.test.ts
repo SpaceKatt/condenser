@@ -1,3 +1,5 @@
+import { tokenGenerator } from './resources';
+
 import {
     AdjacencyMatrix,
     AdjacencyMatrixBuilder,
@@ -7,19 +9,11 @@ import {
     NullScoreStrategy,
 } from '../';
 
-import {
-    tokenGenerator,
-} from './resources';
-
 describe('NullScoreStrategy', () => {
     it('NullScoreStrategy performs NOP', () => {
-        const adjMatrix = AdjacencyMatrixBuilder
-            .newBuilder()
+        const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(2))
-            .withEdges(Edge.getMatrixFromScoreMatrix([
-                [1, 2],
-                [3, 4]
-            ]))
+            .withEdges(Edge.getMatrixFromScoreMatrix([[1, 2], [3, 4]]))
             .build();
 
         const nullStrategy = NullScoreStrategy.create();

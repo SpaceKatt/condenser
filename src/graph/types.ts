@@ -1,7 +1,4 @@
-import {
-    Edge,
-    GraphIsomorph,
-} from './';
+import { Edge, GraphIsomorph } from './';
 
 export type Path = number[];
 

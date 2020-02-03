@@ -1,21 +1,8 @@
-import {
-    AdjacencyMatrixBuilder,
-} from '../graph/adjMatrixBuilder';
+import { isZeroMatrix, tokenGenerator } from './resources/shared';
+import { TESTTOKEN } from './resources/testToken';
 
-import {
-    Edge,
-    newZeroEdge,
-    numberArrayToEdges,
-} from '../';
-
-import {
-    isZeroMatrix,
-    tokenGenerator,
-} from './resources/shared';
-
-import {
-    TESTTOKEN,
-} from './resources/testToken';
+import { AdjacencyMatrixBuilder } from '../graph/adjMatrixBuilder';
+import { Edge, newZeroEdge, numberArrayToEdges } from '../';
 
 describe('AdjacencyMatrixBuilder', () => {
     it('Builds a one node matrix', () => {
@@ -29,7 +16,7 @@ describe('AdjacencyMatrixBuilder', () => {
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             /* tslint:disable-next-line:no-unused-expression */
-            adjMatrix.getNode(numberOfNodes).kind
+            adjMatrix.getNode(numberOfNodes).kind;
         }).toThrow(Error);
     });
 
@@ -44,7 +31,7 @@ describe('AdjacencyMatrixBuilder', () => {
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             /* tslint:disable-next-line:no-unused-expression */
-            adjMatrix.getNode(numberOfNodes).kind
+            adjMatrix.getNode(numberOfNodes).kind;
         }).toThrow(Error);
     });
 
@@ -59,7 +46,7 @@ describe('AdjacencyMatrixBuilder', () => {
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             /* tslint:disable-next-line:no-unused-expression */
-            adjMatrix.getNode(numberOfNodes).kind
+            adjMatrix.getNode(numberOfNodes).kind;
         }).toThrow(Error);
     });
 
@@ -120,7 +107,7 @@ describe('AdjacencyMatrixBuilder', () => {
         const edges: Edge[][] = [];
 
         expect(() => {
-            builder.withEdges(edges)
+            builder.withEdges(edges);
         }).toThrow(Error);
     });
 
@@ -128,11 +115,15 @@ describe('AdjacencyMatrixBuilder', () => {
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
         expect(() => {
-            builder.withEdgeCoords([{
-                fro: 0,
-                to: 666,
-                edge: newZeroEdge(),
-            }].values());
+            builder.withEdgeCoords(
+                [
+                    {
+                        fro: 0,
+                        to: 666,
+                        edge: newZeroEdge(),
+                    },
+                ].values(),
+            );
         }).toThrow(Error);
     });
 
@@ -145,7 +136,7 @@ describe('AdjacencyMatrixBuilder', () => {
         ]);
 
         expect(() => {
-            builder.withEdges(edges)
+            builder.withEdges(edges);
         }).toThrow(Error);
     });
 });

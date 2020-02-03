@@ -1,7 +1,4 @@
-import {
-    GraphIsomorph,
-    ScoreStrategy,
-} from '../';
+import { GraphIsomorph, ScoreStrategy } from '../';
 
 export class NullScoreStrategy implements ScoreStrategy {
     private constructor() {}

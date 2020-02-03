@@ -21,7 +21,10 @@ export class DijkstraLongestPath implements PathStrategy {
         const lenNodes = isomorph.getNumberNodes();
         const destination = lenNodes - 1;
 
-        const cost: PastMemo[] = new Array(lenNodes).fill({ lastNode: -1, cost: -1 });
+        const cost: PastMemo[] = new Array(lenNodes).fill({
+            lastNode: -1,
+            cost: -1,
+        });
         const neighborHeap = new Heap<number>();
 
         cost[this.source] = { lastNode: -1, cost: 0 };
@@ -42,7 +45,7 @@ export class DijkstraLongestPath implements PathStrategy {
 
                 // If an edge exists and new max cost found
                 // TODO: WHat if they are equal? Ambiguous case
-                if (costToNode > 0 && (costToIndex + costToNode) > previousCost) {
+                if (costToNode > 0 && costToIndex + costToNode > previousCost) {
                     const memo: PastMemo = {
                         cost: costToIndex + costToNode,
                         lastNode: index,
@@ -88,7 +91,9 @@ export class DijkstraLongestPath implements PathStrategy {
             const nextIndex = costMemos[currentIndex].lastNode;
 
             if (reversePath.length > len) {
-                throw new Error('DijkstraSinglePath::findMaxCost : Disconnected graph');
+                throw new Error(
+                    'DijkstraSinglePath::findMaxCost : Disconnected graph',
+                );
             }
 
             reversePath.push(nextIndex);

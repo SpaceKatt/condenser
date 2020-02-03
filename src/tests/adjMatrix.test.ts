@@ -1,25 +1,14 @@
+import { testTokenFactory, tokenGenerator } from './resources/shared';
+import { TestToken, TESTTOKEN, TestTokenOpts } from './resources/testToken';
+
 import {
     AdjacencyMatrix,
     AdjacencyMatrixBuilder,
     AdjacencyMatrixParams,
     Edge,
 } from '../graph';
-import {
-    TokenFactory,
-} from '../token';
-import {
-    newZeroEdge,
-    numberArrayToEdges,
-} from '../utils';
-import {
-    testTokenFactory,
-    tokenGenerator,
-} from './resources/shared';
-import {
-    TestToken,
-    TESTTOKEN,
-    TestTokenOpts,
-} from './resources/testToken';
+import { TokenFactory } from '../token';
+import { newZeroEdge, numberArrayToEdges } from '../utils';
 
 describe('AdjacencyMatrix', () => {
     it('creates a matrix from a generator of tokens', () => {
@@ -30,7 +19,7 @@ describe('AdjacencyMatrix', () => {
         const adjMatrix = AdjacencyMatrix.getAdjacencyMatrix(opts);
 
         expect(adjMatrix).toBeDefined();
-    })
+    });
 
     it('getEdge gets an Edge', () => {
         const opts: AdjacencyMatrixParams = {
@@ -77,7 +66,6 @@ describe('AdjacencyMatrix', () => {
             adjMatrix.setEdge(newZeroEdge(), 932, 7);
         }).toThrow(Error);
     });
-
 
     it('getNumberNodes gets correct number of nodes', () => {
         for (let numberNodes = 0; numberNodes < 25; numberNodes++) {
@@ -126,7 +114,7 @@ describe('AdjacencyMatrix', () => {
             id,
             foo: 'bar',
         } as TestTokenOpts);
-        
+
         const result = adjMatrix.setNode(node, 2);
 
         // Expect we get the old node back
@@ -323,11 +311,10 @@ describe('AdjacencyMatrix', () => {
     });
 
     it('getAdjacencyMatrix throws on bad input', () => {
-        const opts: AdjacencyMatrixParams = {
-        };
+        const opts: AdjacencyMatrixParams = {};
 
         expect(() => {
             AdjacencyMatrix.getAdjacencyMatrix(opts);
         }).toThrow(Error);
     });
-})
+});

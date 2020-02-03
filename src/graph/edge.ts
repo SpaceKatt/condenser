@@ -1,5 +1,5 @@
 export class Edge {
-    constructor(private score: number) {};
+    constructor(private score: number) {}
 
     getScore(): number {
         return this.score;

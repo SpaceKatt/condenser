@@ -21,7 +21,7 @@ export abstract class Token {
     constructor(opts: TokenOpts) {
         this.kind = opts.kind;
         this.id = opts.id;
-    };
+    }
 
     abstract clone(): Token;
 
@@ -125,4 +125,4 @@ export class NumberToken extends Token {
 export const numberTokenFactoryDetails: TokenContructorDetails = {
     kind: NUMBER,
     ctor: NumberToken,
-}
+};
