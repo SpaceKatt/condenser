@@ -25,7 +25,7 @@ export class DijkstraSinglePath implements PathStrategy {
         const neighborHeap = new Heap<number>();
 
         cost[this.source] = { lastNode: -1, cost: 0 };
-        neighborHeap.push(0);
+        neighborHeap.push(this.source);
 
         // Bredth-first, greedy helper
         const searchNeighbors = (index: number): void => {
