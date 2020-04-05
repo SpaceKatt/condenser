@@ -1,8 +1,11 @@
+// https://github.com/facebook/jest/issues/3112#issuecomment-398581705
+const base = require("./jest.config.base.js");
+
 module.exports = {
-    roots: ['./src/tests'],
-    transform: {
-        '^.+\\.tsx?$': 'ts-jest',
-    },
-    collectCoverage: true,
-    collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+    ...base,
+    projects:
+    [
+        "<rootDir>/packages/*/jest.config.js"
+    ],
+    coverageDirectory: "<rootDir>/coverage/"
 };

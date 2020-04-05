@@ -1,0 +1,45 @@
+{
+  "name": "condenser",
+  "version": "0.0.1",
+  "description": "NLP framework to express utterance processing as a pipeline of graph transformations.",
+  "main": "build/src/index.js",
+  "scripts": {
+    "compile": "tsc -b .",
+    "pretest": "npm run compile",
+    "lint": "eslint -c .eslintrc.js './src/**/*.ts'",
+    "test": "jest --colors --coverage --verbose",
+    "test-coverage": "jest --colors --coverage --verbose --coverageReporters=text-lcov | coveralls",
+    "test:watch": "jest --colors --coverage --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceKatt/condenser.git"
+  },
+  "author": "Thomas Kercheval",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpaceKatt/condenser/issues"
+  },
+  "homepage": "https://github.com/SpaceKatt/condenser#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.1",
+    "@types/uuid": "^3.4.5",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "coveralls": "^3.0.8",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "gts": "^1.1.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "heap-js": "^1.4.1",
+    "uuid": "^3.3.3"
+  }
+}
