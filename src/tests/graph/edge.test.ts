@@ -1,4 +1,4 @@
-import { Edge } from '../graph';
+import { Edge } from '../../graph';
 
 describe('Edge', () => {
     it('getScore', () => {
