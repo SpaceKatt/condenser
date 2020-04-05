@@ -1,12 +1,13 @@
-import {
-    AdjacencyMatrix,
-    AdjacencyMatrixParams,
-    Edge,
-    EdgeCoordinates,
-} from './';
+import { AdjacencyMatrix, AdjacencyMatrixParams } from './';
 
-import { isOutsideBounds, cloneNodes, cloneEdges, newZeroEdge } from '../utils';
-import { Token } from '../token';
+import { Edge, EdgeCoordinates } from '../../';
+import {
+    isOutsideBounds,
+    cloneNodes,
+    cloneEdges,
+    newZeroEdge,
+} from '../../../utils';
+import { Token } from '../../../token';
 
 export class AdjacencyMatrixBuilder {
     private nodes: Token[];

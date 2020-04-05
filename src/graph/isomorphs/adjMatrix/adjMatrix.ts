@@ -1,12 +1,9 @@
-import {
-    AdjacencyMatrixBuilder,
-    Edge,
-    EdgeCoordinates,
-    GraphIsomorph,
-} from './';
+import { AdjacencyMatrixBuilder } from './';
 
-import { isOutsideBounds } from '../utils';
-import { Token } from '../token';
+import { Edge, EdgeCoordinates } from '../../';
+import { GraphIsomorph } from '../';
+import { isOutsideBounds } from '../../../utils';
+import { Token } from '../../../token';
 
 export interface AdjacencyMatrixParams {
     array?: IterableIterator<Token>;

@@ -1,7 +1,7 @@
 import { isZeroMatrix, tokenGenerator } from './resources/shared';
 import { TESTTOKEN } from './resources/testToken';
 
-import { AdjacencyMatrixBuilder } from '../graph/adjMatrixBuilder';
+import { AdjacencyMatrixBuilder } from '../graph';
 import { Edge, newZeroEdge, numberArrayToEdges } from '../';
 
 describe('AdjacencyMatrixBuilder', () => {
