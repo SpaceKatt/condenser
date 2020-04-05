@@ -1,0 +1,41 @@
+{
+  "name": "condenser-azure-luis",
+  "version": "0.0.1",
+  "description": "Azure LUIS integration for condenser as a ScoreStrategy",
+  "main": "./build/index.js",
+  "scripts": {
+    "test": "jest --colors --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceKatt/condenser.git"
+  },
+  "keywords": [
+    "nlp",
+    "condenser",
+    "luis",
+    "azure"
+  ],
+  "author": "Thomas Kercheval",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpaceKatt/condenser/issues"
+  },
+  "homepage": "https://github.com/SpaceKatt/condenser#readme",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "coveralls": "^3.0.11",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "gts": "^1.1.2",
+    "jest": "^25.2.7",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  }
+}
