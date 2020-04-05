@@ -1,18 +1,7 @@
-import {
-    AdjacencyMatrix,
-    GraphIsomorph,
-    Edge,
-    PathStrategy,
-    ScoreStrategy,
-    Path
-} from './';
+import { GraphIsomorph, Edge, PathStrategy, ScoreStrategy, Path } from './';
 
-import {
-    Token,
-} from '../token';
-import {
-    generateId,
-} from '../utils';
+import { Token } from '../token';
+import { generateId } from '../utils';
 
 // TODO: GraphBuilder class
 export class Graph {
@@ -21,8 +10,8 @@ export class Graph {
     private constructor(
         private readonly isomorph: GraphIsomorph,
         private readonly scoreStrategy: ScoreStrategy,
-        private readonly pathStrategy: PathStrategy)
-    { 
+        private readonly pathStrategy: PathStrategy,
+    ) {
         this.id = generateId().next().value;
     }
 
@@ -68,7 +57,11 @@ export class Graph {
     }
 
     clone(): Graph {
-        const newGraph = new Graph(this.isomorph.clone(), this.scoreStrategy, this.pathStrategy);
+        const newGraph = new Graph(
+            this.isomorph.clone(),
+            this.scoreStrategy,
+            this.pathStrategy,
+        );
 
         return newGraph;
     }

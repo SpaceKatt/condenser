@@ -1,17 +1,23 @@
-import { AdjacencyMatrix, AdjacencyMatrixParams, Edge, EdgeCoordinates } from '../graph';
+import { AdjacencyMatrix, Edge, EdgeCoordinates } from '../graph';
 import { Token } from '../';
 
 import { v4 as uuid } from 'uuid';
 
-export const newZeroEdge = (): Edge => { return new Edge(0); };
+export const newZeroEdge = (): Edge => {
+    return new Edge(0);
+};
 
-export function* cloneNodes(adjMatrix: AdjacencyMatrix): IterableIterator<Token> {
+export function* cloneNodes(
+    adjMatrix: AdjacencyMatrix,
+): IterableIterator<Token> {
     for (const node of adjMatrix.getNodes()) {
         yield node.clone();
     }
 }
 
-export function* cloneEdges(adjMatrix: AdjacencyMatrix): IterableIterator<EdgeCoordinates> {
+export function* cloneEdges(
+    adjMatrix: AdjacencyMatrix,
+): IterableIterator<EdgeCoordinates> {
     const length = adjMatrix.getNumberNodes();
     for (let i = 0; i < length; i++) {
         for (let j = 0; j < length; j++) {
@@ -25,7 +31,7 @@ export function* cloneEdges(adjMatrix: AdjacencyMatrix): IterableIterator<EdgeCo
 }
 
 export const numberArrayToEdges = (mat: number[][]): Edge[][] => {
-    const length =  mat.length;
+    const length = mat.length;
     const edges: Edge[][] = [];
 
     for (let i = 0; i < length; i++) {
@@ -34,9 +40,9 @@ export const numberArrayToEdges = (mat: number[][]): Edge[][] => {
             edges[i].push(new Edge(mat[i][j]));
         }
     }
-    
+
     return edges;
-}
+};
 
 /**
  * boundsCheck
@@ -53,10 +59,10 @@ export const isOutsideBounds = (
     fro: number,
     to: number,
     lower: number,
-    upper: number
+    upper: number,
 ): boolean => {
     return fro < lower || to < lower || fro >= upper || to >= upper;
-}
+};
 
 export function* generateId(): IterableIterator<string> {
     while (true) {

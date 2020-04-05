@@ -1,11 +1,6 @@
-import {
-    Edge,
-    EdgeCoordinates,
-} from './';
+import { Edge, EdgeCoordinates } from './';
 
-import {
-    Token,
-} from '../token';
+import { Token } from '../token';
 
 export interface GraphIsomorph {
     getEdge(fro: number, to: number): Edge;

@@ -1,21 +1,8 @@
-import {
-    AdjacencyMatrixBuilder,
-} from '../graph/adjMatrixBuilder';
+import { isZeroMatrix, tokenGenerator } from './resources/shared';
+import { TESTTOKEN } from './resources/testToken';
 
-import {
-    Edge,
-    newZeroEdge,
-    numberArrayToEdges,
-} from '../';
-
-import {
-    isZeroMatrix,
-    tokenGenerator,
-} from './resources/shared';
-
-import {
-    TESTTOKEN,
-} from './resources/testToken';
+import { AdjacencyMatrixBuilder } from '../graph/adjMatrixBuilder';
+import { Edge, newZeroEdge, numberArrayToEdges } from '../';
 
 describe('AdjacencyMatrixBuilder', () => {
     it('Builds a one node matrix', () => {
@@ -29,7 +16,7 @@ describe('AdjacencyMatrixBuilder', () => {
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             /* tslint:disable-next-line:no-unused-expression */
-            adjMatrix.getNode(numberOfNodes).kind
+            adjMatrix.getNode(numberOfNodes).kind;
         }).toThrow(Error);
     });
 
@@ -44,7 +31,7 @@ describe('AdjacencyMatrixBuilder', () => {
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             /* tslint:disable-next-line:no-unused-expression */
-            adjMatrix.getNode(numberOfNodes).kind
+            adjMatrix.getNode(numberOfNodes).kind;
         }).toThrow(Error);
     });
 
@@ -59,7 +46,7 @@ describe('AdjacencyMatrixBuilder', () => {
         expect(adjMatrix.getNode(numberOfNodes - 1).kind).toEqual(TESTTOKEN);
         expect(() => {
             /* tslint:disable-next-line:no-unused-expression */
-            adjMatrix.getNode(numberOfNodes).kind
+            adjMatrix.getNode(numberOfNodes).kind;
         }).toThrow(Error);
     });
 
@@ -75,10 +62,7 @@ describe('AdjacencyMatrixBuilder', () => {
     });
 
     it('Is set with custom edges', () => {
-        const mat: number[][] = [
-            [1, 2],
-            [9, 4],
-        ];
+        const mat: number[][] = [[1, 2], [9, 4]];
 
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
@@ -94,10 +78,7 @@ describe('AdjacencyMatrixBuilder', () => {
     });
 
     it('Is clonable', () => {
-        const mat: number[][] = [
-            [7, 2],
-            [8, 3],
-        ];
+        const mat: number[][] = [[7, 2], [8, 3]];
 
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
@@ -105,8 +86,6 @@ describe('AdjacencyMatrixBuilder', () => {
         builder.withEdges(numberArrayToEdges(mat));
 
         const adjMatrix = builder.build();
-
-        const clonedBoi = AdjacencyMatrixBuilder.clone(adjMatrix);
 
         expect(adjMatrix.getEdge(0, 0).getScore()).toEqual(7);
         expect(adjMatrix.getEdge(0, 1).getScore()).toEqual(2);
@@ -120,7 +99,7 @@ describe('AdjacencyMatrixBuilder', () => {
         const edges: Edge[][] = [];
 
         expect(() => {
-            builder.withEdges(edges)
+            builder.withEdges(edges);
         }).toThrow(Error);
     });
 
@@ -128,24 +107,25 @@ describe('AdjacencyMatrixBuilder', () => {
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
         expect(() => {
-            builder.withEdgeCoords([{
-                fro: 0,
-                to: 666,
-                edge: newZeroEdge(),
-            }].values());
+            builder.withEdgeCoords(
+                [
+                    {
+                        fro: 0,
+                        to: 666,
+                        edge: newZeroEdge(),
+                    },
+                ].values(),
+            );
         }).toThrow(Error);
     });
 
     it('Fails when given no initialized nodes', () => {
         const builder = AdjacencyMatrixBuilder.newBuilder();
 
-        const edges: Edge[][] = numberArrayToEdges([
-            [1, 2],
-            [2, 1],
-        ]);
+        const edges: Edge[][] = numberArrayToEdges([[1, 2], [2, 1]]);
 
         expect(() => {
-            builder.withEdges(edges)
+            builder.withEdges(edges);
         }).toThrow(Error);
     });
 });

@@ -1,15 +1,19 @@
-import { AdjacencyMatrixBuilder, Edge, EdgeCoordinates, GraphIsomorph } from './';
 import {
-    isOutsideBounds,
-    Token,
-} from '../';
+    AdjacencyMatrixBuilder,
+    Edge,
+    EdgeCoordinates,
+    GraphIsomorph,
+} from './';
 
-export interface  AdjacencyMatrixParams {
+import { isOutsideBounds } from '../utils';
+import { Token } from '../token';
+
+export interface AdjacencyMatrixParams {
     array?: IterableIterator<Token>;
     edges?: IterableIterator<EdgeCoordinates>;
 }
 
-export class AdjacencyMatrix implements GraphIsomorph{
+export class AdjacencyMatrix implements GraphIsomorph {
     private nodes: Token[];
     private edges: Edge[][];
 
@@ -29,7 +33,6 @@ export class AdjacencyMatrix implements GraphIsomorph{
                 this.edges[i].push(new Edge(0));
             }
         }
-
     }
 
     equalScore(other: GraphIsomorph): boolean {
@@ -39,7 +42,10 @@ export class AdjacencyMatrix implements GraphIsomorph{
 
         for (let i = 0; i < this.nodes.length; i++) {
             for (let j = 0; j < this.nodes.length; j++) {
-                if (this.getEdge(i, j).getScore() !== other.getEdge(i, j).getScore()) {
+                if (
+                    this.getEdge(i, j).getScore() !==
+                    other.getEdge(i, j).getScore()
+                ) {
                     return false;
                 }
             }
@@ -111,7 +117,9 @@ export class AdjacencyMatrix implements GraphIsomorph{
 
     swapNodes(first: number, second: number): void {
         if (isOutsideBounds(first, second, 0, this.nodes.length)) {
-            throw new Error('Out of bound access in AdjacencyMatrix::swapNodes');
+            throw new Error(
+                'Out of bound access in AdjacencyMatrix::swapNodes',
+            );
         }
 
         if (first === second) {
@@ -126,7 +134,7 @@ export class AdjacencyMatrix implements GraphIsomorph{
         this.swapEdges(first, second);
     }
 
-    private swapEdges(indexOne: number, indexTwo: number) {
+    private swapEdges(indexOne: number, indexTwo: number): void {
         const smaller = indexOne < indexTwo ? indexOne : indexTwo;
         const larger = indexOne > indexTwo ? indexOne : indexTwo;
 
@@ -146,17 +154,21 @@ export class AdjacencyMatrix implements GraphIsomorph{
     }
 
     clone(): GraphIsomorph {
-        return AdjacencyMatrix.getAdjacencyMatrix({ array: this.getNodes(), edges: this.getEdgeCoordinates() });
+        return AdjacencyMatrix.getAdjacencyMatrix({
+            array: this.getNodes(),
+            edges: this.getEdgeCoordinates(),
+        });
     }
 
-    private static fromNodeGenerator(nodes: IterableIterator<Token>): AdjacencyMatrix {
+    private static fromNodeGenerator(
+        nodes: IterableIterator<Token>,
+    ): AdjacencyMatrix {
         return new AdjacencyMatrix(nodes);
     }
 
     static getAdjacencyMatrix(params: AdjacencyMatrixParams): AdjacencyMatrix {
         if (params.array && params.edges) {
-            return AdjacencyMatrixBuilder
-                .newBuilder()
+            return AdjacencyMatrixBuilder.newBuilder()
                 .withNodes(params.array)
                 .withEdgeCoords(params.edges)
                 .build();
@@ -166,6 +178,8 @@ export class AdjacencyMatrix implements GraphIsomorph{
             return AdjacencyMatrix.fromNodeGenerator(params.array);
         }
 
-        throw new TypeError('AdjacencyMatrix::getAdjacencyMatrix - Invalid parameters');
+        throw new TypeError(
+            'AdjacencyMatrix::getAdjacencyMatrix - Invalid parameters',
+        );
     }
 }

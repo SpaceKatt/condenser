@@ -1,6 +1,4 @@
-import {
-    Edge,
-} from '../graph';
+import { Edge } from '../graph';
 
 describe('Edge', () => {
     it('getScore', () => {
@@ -19,11 +17,11 @@ describe('Edge', () => {
     });
 
     it('equal values equal', () => {
-        expect((new Edge(7)).equal(new Edge(7))).toBeTruthy();
+        expect(new Edge(7).equal(new Edge(7))).toBeTruthy();
     });
 
     it('unequal values do not equal', () => {
-        expect((new Edge(7)).equal(new Edge(6))).toBeFalsy();
+        expect(new Edge(7).equal(new Edge(6))).toBeFalsy();
     });
 
     it('clone', () => {
@@ -38,10 +36,7 @@ describe('Edge', () => {
     });
 
     it('Creates Edge matrix from number matrix', () => {
-        const scoreMatrix = [
-            [1, 2],
-            [7, 5]
-        ];
+        const scoreMatrix = [[1, 2], [7, 5]];
 
         const resultMatrix = Edge.getMatrixFromScoreMatrix(scoreMatrix);
 

@@ -1,4 +1,11 @@
 import {
+    TESTTOKEN,
+    TestToken,
+    TestTokenOpts,
+    testTokenFactoryDetails,
+} from './resources';
+
+import {
     NUMBER,
     NumberToken,
     NumberTokenOpts,
@@ -8,13 +15,6 @@ import {
     WordToken,
     WordTokenOpts,
 } from '../';
-
-import {
-    TESTTOKEN,
-    TestToken,
-    TestTokenOpts,
-    testTokenFactoryDetails,
-} from './resources';
 
 describe('Token Factory', () => {
     it('Constructs default WORD Tokens', () => {
@@ -54,9 +54,11 @@ describe('Token Factory', () => {
             kind: TESTTOKEN,
             id: '1',
             foo: 'ree',
-        }
+        };
 
-        expect(tokenFactory.createToken(testTokenOpts)).toBeInstanceOf(TestToken);
+        expect(tokenFactory.createToken(testTokenOpts)).toBeInstanceOf(
+            TestToken,
+        );
     });
 
     it('Throws on unknown symbol', () => {

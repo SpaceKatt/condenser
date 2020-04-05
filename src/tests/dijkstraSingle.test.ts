@@ -1,26 +1,19 @@
-import {
-    AdjacencyMatrix,
-    AdjacencyMatrixBuilder,
-    DijkstraLongestPath,
-    Path,
-    Edge,
-} from '../';
+import { isEqualPaths, tokenGenerator } from './resources';
 
-import {
-    isEqualPaths,
-    tokenGenerator,
-} from './resources';
+import { AdjacencyMatrixBuilder, Path, Edge } from '../graph';
+import { DijkstraLongestPath } from '../pathStrategy';
 
 describe('DijkstraLongestPath', () => {
     it('Picks the best path', () => {
-        const adjMatrix = AdjacencyMatrixBuilder
-            .newBuilder()
+        const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(3))
-            .withEdges(Edge.getMatrixFromScoreMatrix([
-                [0, 1, 0],
-                [0, 0, 1],
-                [0, 0, 0]
-            ]))
+            .withEdges(
+                Edge.getMatrixFromScoreMatrix([
+                    [0, 1, 0],
+                    [0, 0, 1],
+                    [0, 0, 0],
+                ]),
+            )
             .build();
 
         const knownBestPath: Path = [0, 1, 2];
@@ -35,15 +28,16 @@ describe('DijkstraLongestPath', () => {
     });
 
     it('Picks best path, again', () => {
-        const adjMatrix = AdjacencyMatrixBuilder
-            .newBuilder()
+        const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(4))
-            .withEdges(Edge.getMatrixFromScoreMatrix([
-                [0, 0, 1, 0],
-                [0, 0, 0, 1],
-                [0, 1, 0, 0],
-                [0, 0, 0, 0]
-            ]))
+            .withEdges(
+                Edge.getMatrixFromScoreMatrix([
+                    [0, 0, 1, 0],
+                    [0, 0, 0, 1],
+                    [0, 1, 0, 0],
+                    [0, 0, 0, 0],
+                ]),
+            )
             .build();
 
         const knownBestPath: Path = [0, 2, 1, 3];
@@ -58,15 +52,16 @@ describe('DijkstraLongestPath', () => {
     });
 
     it('Picks best path among options', () => {
-        const adjMatrix = AdjacencyMatrixBuilder
-            .newBuilder()
+        const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(4))
-            .withEdges(Edge.getMatrixFromScoreMatrix([
-                [0, 1, 3, 0],
-                [0, 0, 1, 1],
-                [0, 0, 0, 2],
-                [0, 0, 0, 0]
-            ]))
+            .withEdges(
+                Edge.getMatrixFromScoreMatrix([
+                    [0, 1, 3, 0],
+                    [0, 0, 1, 1],
+                    [0, 0, 0, 2],
+                    [0, 0, 0, 0],
+                ]),
+            )
             .build();
 
         const knownBestPath: Path = [0, 2, 3];
@@ -81,17 +76,19 @@ describe('DijkstraLongestPath', () => {
     });
 
     it('Picks best path among more options', () => {
-        const adjMatrix = AdjacencyMatrixBuilder
-            .newBuilder()
+        const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(6))
-            .withEdges(Edge.getMatrixFromScoreMatrix([
-                [ 0,  1, 33, 98,  0,  0],
-                [ 0,  0,  0,  3,  0,  1],
-                [ 0,  0,  0,  0, 17,  0],
-                [ 0,  0,  0,  0,  0,  1],
-                [ 0,  0,  0,  0,  0,  1],
-                [ 0,  0,  0,  0,  0,  0]
-            ]))
+            .withEdges(
+                // prettier-ignore
+                Edge.getMatrixFromScoreMatrix([
+                    [ 0,  1, 33, 98,  0,  0],
+                    [ 0,  0,  0,  3,  0,  1],
+                    [ 0,  0,  0,  0, 17,  0],
+                    [ 0,  0,  0,  0,  0,  1],
+                    [ 0,  0,  0,  0,  0,  1],
+                    [ 0,  0,  0,  0,  0,  0],
+                ]),
+            )
             .build();
 
         const knownBestPath: Path = [0, 3, 5];
@@ -106,14 +103,15 @@ describe('DijkstraLongestPath', () => {
     });
 
     it('Only picks one path', () => {
-        const adjMatrix = AdjacencyMatrixBuilder
-            .newBuilder()
+        const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(3))
-            .withEdges(Edge.getMatrixFromScoreMatrix([
-                [0, 1, 0],
-                [0, 0, 1],
-                [0, 0, 0]
-            ]))
+            .withEdges(
+                Edge.getMatrixFromScoreMatrix([
+                    [0, 1, 0],
+                    [0, 0, 1],
+                    [0, 0, 0],
+                ]),
+            )
             .build();
 
         const pathStrategy = DijkstraLongestPath.create();

@@ -1,25 +1,13 @@
+import { testTokenFactory, tokenGenerator } from './resources/shared';
+import { TestToken, TESTTOKEN, TestTokenOpts } from './resources/testToken';
+
 import {
     AdjacencyMatrix,
     AdjacencyMatrixBuilder,
     AdjacencyMatrixParams,
     Edge,
 } from '../graph';
-import {
-    TokenFactory,
-} from '../token';
-import {
-    newZeroEdge,
-    numberArrayToEdges,
-} from '../utils';
-import {
-    testTokenFactory,
-    tokenGenerator,
-} from './resources/shared';
-import {
-    TestToken,
-    TESTTOKEN,
-    TestTokenOpts,
-} from './resources/testToken';
+import { newZeroEdge, numberArrayToEdges } from '../utils';
 
 describe('AdjacencyMatrix', () => {
     it('creates a matrix from a generator of tokens', () => {
@@ -30,7 +18,7 @@ describe('AdjacencyMatrix', () => {
         const adjMatrix = AdjacencyMatrix.getAdjacencyMatrix(opts);
 
         expect(adjMatrix).toBeDefined();
-    })
+    });
 
     it('getEdge gets an Edge', () => {
         const opts: AdjacencyMatrixParams = {
@@ -77,7 +65,6 @@ describe('AdjacencyMatrix', () => {
             adjMatrix.setEdge(newZeroEdge(), 932, 7);
         }).toThrow(Error);
     });
-
 
     it('getNumberNodes gets correct number of nodes', () => {
         for (let numberNodes = 0; numberNodes < 25; numberNodes++) {
@@ -126,7 +113,7 @@ describe('AdjacencyMatrix', () => {
             id,
             foo: 'bar',
         } as TestTokenOpts);
-        
+
         const result = adjMatrix.setNode(node, 2);
 
         // Expect we get the old node back
@@ -165,22 +152,14 @@ describe('AdjacencyMatrix', () => {
     it('swapNodes swaps two nodes', () => {
         const beforeBuilder = AdjacencyMatrixBuilder.newBuilder();
 
-        const before = [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9],
-        ];
+        const before = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
         beforeBuilder.withNodes(tokenGenerator(3));
         beforeBuilder.withEdges(numberArrayToEdges(before));
 
         const afterBuilder = AdjacencyMatrixBuilder.newBuilder();
 
-        const after = [
-            [1, 3, 2],
-            [7, 9, 8],
-            [4, 6, 5],
-        ];
+        const after = [[1, 3, 2], [7, 9, 8], [4, 6, 5]];
 
         afterBuilder.withNodes(tokenGenerator(3));
         afterBuilder.withEdges(numberArrayToEdges(after));
@@ -203,8 +182,8 @@ describe('AdjacencyMatrix', () => {
         const beforeBuilder = AdjacencyMatrixBuilder.newBuilder();
 
         const before = [
-            [ 1,  2,  3,  4,  5],
-            [ 6,  7,  8,  9, 10],
+            [1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
             [11, 12, 13, 14, 15],
             [16, 17, 18, 19, 20],
             [21, 22, 23, 24, 25],
@@ -216,10 +195,10 @@ describe('AdjacencyMatrix', () => {
         const afterBuilder = AdjacencyMatrixBuilder.newBuilder();
 
         const after = [
-            [ 1,  4,  3,  2,  5],
+            [1, 4, 3, 2, 5],
             [16, 19, 18, 17, 20],
             [11, 14, 13, 12, 15],
-            [ 6,  9,  8,  7, 10],
+            [6, 9, 8, 7, 10],
             [21, 24, 23, 22, 25],
         ];
 
@@ -323,11 +302,10 @@ describe('AdjacencyMatrix', () => {
     });
 
     it('getAdjacencyMatrix throws on bad input', () => {
-        const opts: AdjacencyMatrixParams = {
-        };
+        const opts: AdjacencyMatrixParams = {};
 
         expect(() => {
             AdjacencyMatrix.getAdjacencyMatrix(opts);
         }).toThrow(Error);
     });
-})
+});

@@ -1,18 +1,13 @@
 import {
-    NUMBER,
-    NumberToken,
-    NumberTokenOpts,
     numberTokenFactoryDetails,
     Token,
     TokenOpts,
     TokenContructor,
     TokenContructorDetails,
-    WORD,
-    WordToken,
-    WordTokenOpts,
     wordTokenFactoryDetails,
 } from '.';
 
+// prettier-ignore
 function* defaultTokenConstructorDetails(): IterableIterator<TokenContructorDetails> {
     const defaultOpts = [
         numberTokenFactoryDetails,
@@ -31,7 +26,9 @@ export class TokenFactory {
         this.ctorMap = new Map<symbol, TokenContructor>();
     }
 
-    addConstructors(tokenFactoryCtors: IterableIterator<TokenContructorDetails>): void {
+    addConstructors(
+        tokenFactoryCtors: IterableIterator<TokenContructorDetails>,
+    ): void {
         for (const ctorDetails of tokenFactoryCtors) {
             this.ctorMap.set(ctorDetails.kind, ctorDetails.ctor);
         }
@@ -43,11 +40,13 @@ export class TokenFactory {
         if (tokenCtor !== undefined) {
             return new tokenCtor(tokenOpts);
         } else {
-            throw new TypeError('TokenFactory: Unknown token type detected')
+            throw new TypeError('TokenFactory: Unknown token type detected');
         }
     }
 
-    static createTokenFactory(tokenCtorDetails?: IterableIterator<TokenContructorDetails>): TokenFactory {
+    static createTokenFactory(
+        tokenCtorDetails?: IterableIterator<TokenContructorDetails>,
+    ): TokenFactory {
         const tokenFactory = new TokenFactory();
 
         tokenFactory.addConstructors(defaultTokenConstructorDetails());
