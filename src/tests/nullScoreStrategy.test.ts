@@ -1,13 +1,6 @@
 import { tokenGenerator } from './resources';
 
-import {
-    AdjacencyMatrix,
-    AdjacencyMatrixBuilder,
-    AdjacencyMatrixParams,
-    Edge,
-    GraphIsomorph,
-    NullScoreStrategy,
-} from '../';
+import { AdjacencyMatrixBuilder, Edge, NullScoreStrategy } from '../';
 
 describe('NullScoreStrategy', () => {
     it('NullScoreStrategy performs NOP', () => {

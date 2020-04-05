@@ -5,13 +5,8 @@ import {
     EdgeCoordinates,
 } from './';
 
-import {
-    isOutsideBounds,
-    cloneNodes,
-    cloneEdges,
-    newZeroEdge,
-    Token,
-} from '../';
+import { isOutsideBounds, cloneNodes, cloneEdges, newZeroEdge } from '../utils';
+import { Token } from '../token';
 
 export class AdjacencyMatrixBuilder {
     private nodes: Token[];
@@ -53,8 +48,6 @@ export class AdjacencyMatrixBuilder {
         if (isOutsideBounds(fro, to, 0, this.nodes.length)) {
             throw new Error('withEdge received out of bounds edge');
         }
-
-        const prevEdge = this.edges[fro][to];
 
         this.edges[fro][to] = edge.clone();
 
@@ -112,8 +105,6 @@ export class AdjacencyMatrixBuilder {
     }
 
     static clone(adjMatrix: AdjacencyMatrix): AdjacencyMatrix {
-        const length = 0;
-
         const matrixBuilder = this.newBuilder();
 
         matrixBuilder.withNodes(cloneNodes(adjMatrix));

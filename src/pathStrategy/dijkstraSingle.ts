@@ -1,10 +1,4 @@
-import {
-    AdjacencyMatrix,
-    AdjacencyMatrixBuilder,
-    GraphIsomorph,
-    Path,
-    PathStrategy,
-} from '../';
+import { GraphIsomorph, Path, PathStrategy } from '../';
 
 import { Heap } from 'heap-js';
 
@@ -62,6 +56,7 @@ export class DijkstraLongestPath implements PathStrategy {
 
         // Search while we still have more candidates to inspect
         while (!neighborHeap.isEmpty()) {
+            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             const nextIndex = neighborHeap.pop()!;
 
             searchNeighbors(nextIndex);

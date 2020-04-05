@@ -133,7 +133,7 @@ export class AdjacencyMatrix implements GraphIsomorph {
         this.swapEdges(first, second);
     }
 
-    private swapEdges(indexOne: number, indexTwo: number) {
+    private swapEdges(indexOne: number, indexTwo: number): void {
         const smaller = indexOne < indexTwo ? indexOne : indexTwo;
         const larger = indexOne > indexTwo ? indexOne : indexTwo;
 

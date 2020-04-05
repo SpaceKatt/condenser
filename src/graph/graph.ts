@@ -1,11 +1,4 @@
-import {
-    AdjacencyMatrix,
-    GraphIsomorph,
-    Edge,
-    PathStrategy,
-    ScoreStrategy,
-    Path,
-} from './';
+import { GraphIsomorph, Edge, PathStrategy, ScoreStrategy, Path } from './';
 
 import { Token } from '../token';
 import { generateId } from '../utils';

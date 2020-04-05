@@ -1,9 +1,4 @@
-import {
-    AdjacencyMatrix,
-    AdjacencyMatrixParams,
-    Edge,
-    EdgeCoordinates,
-} from '../graph';
+import { AdjacencyMatrix, Edge, EdgeCoordinates } from '../graph';
 import { Token } from '../';
 
 import { v4 as uuid } from 'uuid';

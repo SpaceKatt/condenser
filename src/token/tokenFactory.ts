@@ -1,21 +1,14 @@
 import {
-    NUMBER,
-    NumberToken,
-    NumberTokenOpts,
     numberTokenFactoryDetails,
     Token,
     TokenOpts,
     TokenContructor,
     TokenContructorDetails,
-    WORD,
-    WordToken,
-    WordTokenOpts,
     wordTokenFactoryDetails,
 } from '.';
 
-function* defaultTokenConstructorDetails(): IterableIterator<
-    TokenContructorDetails
-    > {
+// prettier-ignore
+function* defaultTokenConstructorDetails(): IterableIterator<TokenContructorDetails> {
     const defaultOpts = [
         numberTokenFactoryDetails,
         wordTokenFactoryDetails,

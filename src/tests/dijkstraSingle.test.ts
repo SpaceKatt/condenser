@@ -78,13 +78,14 @@ describe('DijkstraLongestPath', () => {
         const adjMatrix = AdjacencyMatrixBuilder.newBuilder()
             .withNodes(tokenGenerator(6))
             .withEdges(
+                // prettier-ignore
                 Edge.getMatrixFromScoreMatrix([
-                    [0, 1, 33, 98, 0, 0],
-                    [0, 0, 0, 3, 0, 1],
-                    [0, 0, 0, 0, 17, 0],
-                    [0, 0, 0, 0, 0, 1],
-                    [0, 0, 0, 0, 0, 1],
-                    [0, 0, 0, 0, 0, 0],
+                    [ 0,  1, 33, 98,  0,  0],
+                    [ 0,  0,  0,  3,  0,  1],
+                    [ 0,  0,  0,  0, 17,  0],
+                    [ 0,  0,  0,  0,  0,  1],
+                    [ 0,  0,  0,  0,  0,  1],
+                    [ 0,  0,  0,  0,  0,  0],
                 ]),
             )
             .build();
