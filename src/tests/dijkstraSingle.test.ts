@@ -1,6 +1,7 @@
 import { isEqualPaths, tokenGenerator } from './resources';
 
-import { AdjacencyMatrixBuilder, DijkstraLongestPath, Path, Edge } from '../';
+import { AdjacencyMatrixBuilder, Path, Edge } from '../graph';
+import { DijkstraLongestPath } from '../pathStrategy';
 
 describe('DijkstraLongestPath', () => {
     it('Picks the best path', () => {

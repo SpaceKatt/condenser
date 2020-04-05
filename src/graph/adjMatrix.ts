@@ -5,7 +5,8 @@ import {
     GraphIsomorph,
 } from './';
 
-import { isOutsideBounds, Token } from '../';
+import { isOutsideBounds } from '../utils';
+import { Token } from '../token';
 
 export interface AdjacencyMatrixParams {
     array?: IterableIterator<Token>;
