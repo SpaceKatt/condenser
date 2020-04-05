@@ -1,8 +1,4 @@
-import {
-    Token,
-    TokenOpts,
-    TokenContructorDetails,
-} from '../../';
+import { Token, TokenOpts, TokenContructorDetails } from '../../';
 
 export const TESTTOKEN: unique symbol = Symbol('TESTTOKEN');
 export type TESTTOKEN = typeof TESTTOKEN;
@@ -43,6 +39,4 @@ export class TestToken extends Token {
 export const testTokenFactoryDetails: TokenContructorDetails = {
     kind: TESTTOKEN,
     ctor: TestToken,
-}
-
-
+};
