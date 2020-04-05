@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "compile": "lerna run compile",
+    "test-coverage": "lerna run test-coverage --stream",
     "test": "lerna run test --stream"
   },
   "devDependencies": {
