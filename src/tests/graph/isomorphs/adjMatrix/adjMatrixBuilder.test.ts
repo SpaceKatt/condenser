@@ -1,8 +1,6 @@
-import { isZeroMatrix, tokenGenerator } from './resources/shared';
-import { TESTTOKEN } from './resources/testToken';
-
-import { AdjacencyMatrixBuilder } from '../graph/adjMatrixBuilder';
-import { Edge, newZeroEdge, numberArrayToEdges } from '../';
+import { AdjacencyMatrixBuilder, Edge } from '../../../../graph';
+import { TESTTOKEN, isZeroMatrix, tokenGenerator } from '../../../resources';
+import { newZeroEdge, numberArrayToEdges } from '../../../../utils';
 
 describe('AdjacencyMatrixBuilder', () => {
     it('Builds a one node matrix', () => {

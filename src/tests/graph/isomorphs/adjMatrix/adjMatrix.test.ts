@@ -1,13 +1,17 @@
-import { testTokenFactory, tokenGenerator } from './resources/shared';
-import { TestToken, TESTTOKEN, TestTokenOpts } from './resources/testToken';
-
+import {
+    tokenGenerator,
+    TestToken,
+    TESTTOKEN,
+    testTokenFactory,
+    TestTokenOpts,
+} from '../../../resources';
 import {
     AdjacencyMatrix,
     AdjacencyMatrixBuilder,
     AdjacencyMatrixParams,
     Edge,
-} from '../graph';
-import { newZeroEdge, numberArrayToEdges } from '../utils';
+} from '../../../../graph';
+import { newZeroEdge, numberArrayToEdges } from '../../../../utils';
 
 describe('AdjacencyMatrix', () => {
     it('creates a matrix from a generator of tokens', () => {

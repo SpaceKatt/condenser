@@ -1,25 +1,8 @@
-import {
-    AdjacencyMatrix,
-    Edge,
-    Path,
-} from '../../';
+import { TESTTOKEN, TestTokenOpts, testTokenFactoryDetails } from './testToken';
 
-import {
-    generateId,
-} from '../../utils';
-
-import {
-    Token,
-    TokenOpts,
-    TokenFactory,
-} from '../../token';
-
-import {
-    TESTTOKEN,
-    TestToken,
-    TestTokenOpts,
-    testTokenFactoryDetails,
-} from './testToken';
+import { AdjacencyMatrix, Path } from '../../';
+import { generateId } from '../../utils';
+import { Token, TokenFactory } from '../../token';
 
 export const isEqualPaths = (a: Path, b: Path): boolean => {
     if (a === b) return true;
@@ -31,7 +14,7 @@ export const isEqualPaths = (a: Path, b: Path): boolean => {
     }
 
     return true;
-}
+};
 
 export const isZeroMatrix = (adjMatrix: AdjacencyMatrix): boolean => {
     const length = adjMatrix.getNumberNodes();
@@ -44,9 +27,11 @@ export const isZeroMatrix = (adjMatrix: AdjacencyMatrix): boolean => {
     }
 
     return true;
-}
+};
 
-export const testTokenFactory = TokenFactory.createTokenFactory([testTokenFactoryDetails].values());
+export const testTokenFactory = TokenFactory.createTokenFactory(
+    [testTokenFactoryDetails].values(),
+);
 
 export function* tokenGenerator(num: number): IterableIterator<Token> {
     let i = 0;

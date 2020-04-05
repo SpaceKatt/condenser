@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "tsc -b .",
     "pretest": "npm run compile",
-    "lint": "eslint ./src/**/*.ts",
+    "lint": "eslint -c .eslintrc.js './src/**/*.ts'",
     "test": "jest --colors --coverage --verbose",
     "test-coverage": "jest --colors --coverage --verbose --coverageReporters=text-lcov | coveralls",
     "test:watch": "jest --colors --coverage --watch"

@@ -3,8 +3,7 @@ import {
     TestToken,
     TestTokenOpts,
     testTokenFactoryDetails,
-} from './resources';
-
+} from '../resources';
 import {
     NUMBER,
     NumberToken,
@@ -14,7 +13,7 @@ import {
     WORD,
     WordToken,
     WordTokenOpts,
-} from '../';
+} from '../../';
 
 describe('Token Factory', () => {
     it('Constructs default WORD Tokens', () => {

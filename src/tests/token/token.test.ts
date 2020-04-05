@@ -1,4 +1,4 @@
-import { NUMBER, NumberToken, WORD, WordToken } from '../token';
+import { NUMBER, NumberToken, WORD, WordToken } from '../../token';
 
 describe('Token', () => {
     it('NumberToken clone', () => {
