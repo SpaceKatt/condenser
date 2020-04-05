@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "compile": "lerna run compile",
+    "test": "lerna run test --stream"
+  },
   "devDependencies": {
     "lerna": "^3.20.2"
   }
