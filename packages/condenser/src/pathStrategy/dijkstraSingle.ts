@@ -97,7 +97,7 @@ export class DijkstraLongestPath implements PathStrategy {
         return reversePath.reverse();
     }
 
-    findPaths(isomorph: GraphIsomorph): IterableIterator<Path> {
+    async findPaths(isomorph: GraphIsomorph): Promise<IterableIterator<Path>> {
         // TODO: isomorph.isDirectedAcyclic() check
         const costMemos = this.generateMaxCostMemos(isomorph);
         const path = this.findMaxCostPath(costMemos);

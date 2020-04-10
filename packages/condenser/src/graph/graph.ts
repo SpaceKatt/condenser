@@ -16,12 +16,12 @@ export class Graph {
     }
 
     // To test `score`, mock scoreStrategy. See if the spy has been caught
-    score(): void {
-        this.scoreStrategy.scoreIsomorph(this.isomorph);
+    async score(): Promise<GraphIsomorph> {
+        return this.scoreStrategy.scoreIsomorph(this.isomorph);
     }
 
     // TO test `getPaths`, mock isomorph.
-    getPaths(): IterableIterator<Path> {
+    async getPaths(): Promise<IterableIterator<Path>> {
         return this.pathStrategy.findPaths(this.isomorph);
     }
 

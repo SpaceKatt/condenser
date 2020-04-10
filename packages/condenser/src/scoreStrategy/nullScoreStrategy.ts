@@ -3,7 +3,7 @@ import { GraphIsomorph, ScoreStrategy } from '../';
 export class NullScoreStrategy implements ScoreStrategy {
     private constructor() {}
 
-    scoreIsomorph(isomorph: GraphIsomorph): GraphIsomorph {
+    async scoreIsomorph(isomorph: GraphIsomorph): Promise<GraphIsomorph> {
         return isomorph.clone();
     }
 

@@ -3,11 +3,11 @@ import { Edge, GraphIsomorph } from './';
 export type Path = number[];
 
 export interface PathStrategy {
-    findPaths(matrix: GraphIsomorph): IterableIterator<Path>;
+    findPaths(matrix: GraphIsomorph): Promise<IterableIterator<Path>>;
 }
 
 export interface ScoreStrategy {
-    scoreIsomorph(matrix: GraphIsomorph): GraphIsomorph;
+    scoreIsomorph(matrix: GraphIsomorph): Promise<GraphIsomorph>;
 }
 
 export interface EdgeCoordinates {
